@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登陆</title>
+<style>
+*{ padding:0; margin:0;}
+body{font-family:"微软雅黑","宋体","黑体";}
+input.input_word{ width:345px; height:57px; line-height:57px;background:#fbfbfb; }
+.all{ width:400px; height:57px; border:1px #999 solid;float:left;}
+.all .icon{ width:61px; height:57px;border:none;  border-right:1px #999 solid; float:left; b}
+.all .input_word{ width:337px; height:57px; line-height:57px; border:none; float:left; font-size:14px; color:#878787; text-indent:10px;}
+.star{ width:13px; height:57px; line-height:57px; text-align:center; color:#F00; float:left; }
+
+.huoquyanzhengma{background:url(../img/btn_zhuce.png) 0 -100px no-repeat; width:166px; height:57px; line-height:57px; text-align:center; float:left; font-size:16px; color:#2d2d2d; text-decoration:none; }
+.yanzhengma{background:url(../img/yanzhengma.png) no-repeat; width:166px; height:57px;border:1px #999 solid; line-height:57px; text-align:center; float:left; font-size:16px; color:#2d2d2d; }
+.btn{ width:406px; height:50px; background:url(../img/btn_zhuce.png) no-repeat; font-size:20px; color:#fff; text-align:center; line-height:50px;font-family:"微软雅黑","宋体","黑体"; cursor:pointer;}
+.btn:hover{ background-position:0 -50px;}
+
+.icon1{ background:url(../img/iconsss.png) 0 -0px #fbfbfb; no-repeat;}
+.icon2{ background:url(../img/iconsss.png) 0 -57px #fbfbfb; no-repeat;}
+.icon3{ background:url(../img/iconsss.png) 0 -114px #fbfbfb; no-repeat;}
+.icon4{ background:url(../img/iconsss.png) 0 -171px #fbfbfb; no-repeat;}
+.icon5{ background:url(../img/iconsss.png) 0 -228px #fbfbfb; no-repeat;}
+
+label { width: 10em; float: left; }
+label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+
+.table_word{ font-size:14px; line-height:57px;}
+.table_word a{ text-decoration:none; }
+.title_top_66{ margin:0 auto;position:relative; width:518px; height:64px; background:url(../img/tanchu_top.png) repeat-x; border:1px #c1c1c1 solid; line-height:64px; text-align:center; color:#6d6d6d; font-size:28px;}
+
+</style>
+    <script type="text/javascript" src="{{static_domain}}/js/jquery.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+
+            $('#submit').click(function(){
+
+                if ($("#mobile").val() == '' || $("#mobile").val() == "手机号码") {
+                    $("#error_msg").text("账号不能为空!");
+                    return false;
+                }
+                if ($("#mobile").val() == '' || $("#mobile").val() == "登录密码") {
+                    $("#error_msg").text("密码不能为空!");
+                    return false;
+                }
+
+                var forms=$('#login_form').serialize();
+                $.ajax({
+                    type:'POST',
+                    url:'/login',
+                    data:forms,
+                    success:function(msg){
+                        msg=eval('('+msg+')');
+                        if (msg.error_code == 0) {
+                            parent.window.location = '/';
+                        } else {
+                            $("#error_msg").text(msg.error_msg);
+                        }
+                    }
+                });
+                return false;
+            })
+        });
+
+    </script>
+</head>
+
+<body>
+    <div class="title_top_66">会员登陆</div>
+    <form method="post" id="login_form">
+        <input type="hidden" name="form_hash" value="{{form_hash}}">
+    <table width="430" height="auto" style="margin:20px auto;">
+        <tr><td colspan="2" style="color: red" id="error_msg">
+            {{ flash['login_error'] ? flash['login_error'] :"" }}
+        </td></tr>
+        <tr><td colspan="2" >
+        	<div class="all">
+            	<div class="icon icon1"></div>
+                <div><input type="text" value="手机号码"  onFocus="this.value='';"  id="mobile" name="mobile" class="input_word" /></div>
+               
+            </div>
+             <div class="star">*</div>
+            </td></tr>
+        <tr><td colspan="2" >
+        	<div class="all">
+            	<div class="icon icon2"></div>
+                <div><input type="password" value="登录密码" onFocus="this.value='';" id="password"  name="password" class="input_word" /></div>
+               
+            </div>
+             <div class="star">*</div>
+            </td></tr>
+        
+        <tr><td class="table_word height_low"><input type="checkbox" name="remberme"/>记住我<a href="#" style="color:#4d8ce9; margin-left:10px;">忘记密码</a></td><td class="table_word" align="right" style="padding-right:20px;"  >还没有账号？ <a href="/register"  style="color:#4d8ce9;">立即注册</a></td></tr>
+        <tr><td colspan="2">
+            <button class="btn" type="button" id="submit">马上登陆</button>
+        
+        </td></tr>
+    
+    
+    </table>
+    </form>
+</body>
+</html>

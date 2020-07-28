@@ -1,0 +1,299 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>注册</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: "微软雅黑", "宋体", "黑体";
+        }
+
+        input.input_word {
+            width: 345px;
+            height: 57px;
+            line-height: 57px;
+            background: #fbfbfb;
+        }
+
+        .all {
+            width: 403px;
+            height: 57px;
+            border: 1px #999 solid;
+            float: left;
+        }
+
+        .all .icon {
+            width: 61px;
+            height: 57px;
+            border: none;
+            border-right: 1px #999 solid;
+            float: left;
+        }
+
+        .all .input_word {
+            width: 341px;
+            height: 57px;
+            line-height: 57px;
+            border: none;
+            float: left;
+            font-size: 14px;
+            color: #878787;
+            text-indent: 10px;
+        }
+
+        .star {
+            width: 13px;
+            height: 57px;
+            line-height: 57px;
+            text-align: center;
+            color: #F00;
+            float: left;
+        }
+
+        .huoquyanzhengma {
+            background: url(../img/btn_zhuce.png) 0 -100px no-repeat;
+            width: 166px;
+            height: 57px;
+            line-height: 57px;
+            text-align: center;
+            float: left;
+            font-size: 16px;
+            color: #2d2d2d;
+            text-decoration: none;
+        }
+
+        .huoquyanzhengma:hover {
+            background: #CCC;
+        }
+
+        .yanzhengma {
+            #background: url(../img/yanzhengma.png) no-repeat;
+            width: 166px;
+            height: 57px;
+            border: 1px #999 solid;
+            line-height: 57px;
+            text-align: center;
+            float: left;
+            font-size: 16px;
+            color: #2d2d2d;
+            cursor: pointer;
+            #text-indent: 80px;
+            color: #31225c;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 406px;
+            height: 50px;
+            background: url(../img/btn_zhuce.png) no-repeat;
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+            line-height: 50px;
+            font-family: "微软雅黑", "宋体", "黑体";
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-position: 0 -50px;
+        }
+
+        .icon1 {
+            background: url(../img/iconsss.png) 0 -0px #fbfbfb;
+            no-repeat;
+        }
+
+        .icon2 {
+            background: url(../img/iconsss.png) 0 -57px #fbfbfb;
+            no-repeat;
+        }
+
+        .icon3 {
+            background: url(../img/iconsss.png) 0 -114px #fbfbfb;
+            no-repeat;
+        }
+
+        .icon4 {
+            background: url(../img/iconsss.png) 0 -171px #fbfbfb;
+            no-repeat;
+        }
+
+        .icon5 {
+            background: url(../img/iconsss.png) 0 -228px #fbfbfb;
+            no-repeat;
+        }
+
+        .table_word {
+            font-size: 14px;
+            line-height: 57px;
+        }
+
+        .table_word a {
+            text-decoration: none;
+        }
+
+        .title_top_66 {
+            margin: 0 auto;
+            position: relative;
+            width: 518px;
+            height: 64px;
+            background: url(../img/tanchu_top.png) repeat-x;
+            border: 1px #c1c1c1 solid;
+            line-height: 64px;
+            text-align: center;
+            color: #6d6d6d;
+            font-size: 28px;
+        }
+
+        label {
+            height: auto;
+            float: left;
+        }
+    </style>
+    <script type="text/javascript" src="{{static_domain}}/js/jquery.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#register_form").submit(function(e){
+                $("#register_form").submit();
+            });
+
+            $(".yanzhengma").click(function(){
+                src = '/captcha?' + Math.random();
+                $("#yzm").attr('src', src);
+            });
+
+            $("input").blur(function(){
+                var obj = $(this);
+                if (obj.val() == "") {
+                    obj.val(obj.attr('old-value'));
+                }
+                if (obj.attr('name') == 'password1') {
+
+                    $("input[name='password']").val(obj.val());
+                    if (obj.val() != "登录密码") {
+                        obj.val(obj.val().replace(/[\s\S]/g,"\*"));
+                    }
+                    console.log(obj.val() + $("input[name='password']").val());
+                }
+            });
+            $(".huoquyanzhengma").click(function(){
+
+                $.ajax({
+                    type:'POST',
+                    url:'/smssend',
+                    data:"sms_hash={{sms_hash}}&mobile="+ $("#mobile").val(),
+                    success:function(msg){
+                        msg=eval('('+msg+')');
+                        $("#error_msg").text(msg.error_msg);
+                    }
+                });
+            });
+        });
+
+
+    </script>
+</head>
+
+<body>
+<div class="title_top_66">会员注册</div>
+<form method="post" id="register_form">
+    <input type="hidden" name="form_hash"value="{{form_hash}}">
+    <table width="430" height="auto" style="margin:40px auto;">
+        <tr><td colspan="2" style="color: red" id="error_msg">
+            {{ flash['register_error'] ? flash['register_error'] :"" }}
+        </td></tr>
+        <tr>
+            <td colspan="2">
+                <div class="all">
+                    <div class="icon icon1"></div>
+                    <div><input type="text" value="手机号码" old-value="手机号码" onFocus="this.value='';" id="mobile" name="mobile"
+                                class="input_word"/></div>
+
+                </div>
+                <div class="star">*</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="all">
+                    <div class="icon icon2"></div>
+                    <div><input type="text" value="登录密码" old-value="登录密码" onFocus="this.value='';" name="password1"
+                                class="input_word"/>
+                        <input type="hidden" name="password"
+                               class="input_word"/>
+                    </div>
+
+                </div>
+                <div class="star">*</div>
+            </td>
+        </tr>
+        <tr>
+            <td width="236">
+                <div class="all" style=" width:236px;">
+                    <div class="icon icon3"></div>
+                    <div><input type="text" value="短信验证码" old-value="短信验证码" onFocus="this.value='';" name="mobile_code"
+                                class="input_word" style="width:174px;"/></div>
+
+                </div>
+
+            </td>
+            <td>
+                <a href="#" class="huoquyanzhengma" > 获取验证码</a>
+
+                <div class="star">*</div>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="all">
+                    <div class="icon icon4"></div>
+                    <div><input type="text" value="邮箱" old-value="邮箱" onFocus="this.value='';" name="email"
+                                class="input_word"/></div>
+
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td width="236">
+                <div class="all" style=" width:236px;">
+                    <div class="icon icon5"></div>
+                    <div><input type="text" value="验证码" old-value="验证码" onFocus="this.value='';" name="code" class="input_word"
+                                style="width:174px;"/></div>
+
+                </div>
+
+            </td>
+            <td>
+                <div class="yanzhengma"><img id="yzm" src="/captcha"  title="点击更换" alt="验证码"/> </div>
+                <div class="star">*</div>
+
+            </td>
+        </tr>
+        <tr>
+            <td class="table_word"><input type="checkbox" name="hasread"/>我已经阅读并同意遵守<a href="#"
+                                                                                                style="color:#4d8ce9;">网站条款</a>
+            </td>
+            <td class="table_word" align="right" style="padding-right:20px;">已经有账号？ <a href="/login"
+                                                                                       style="color:#4d8ce9;">立即登陆</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button class="btn" type="submit">立即注册</button>
+            </td>
+        </tr>
+
+
+    </table>
+</form>
+</body>
+</html>

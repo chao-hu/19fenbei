@@ -1,0 +1,251 @@
+@charset "utf-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+.wid180 {
+    width: 950px;
+    overflow: hidden;
+}
+
+.tab {
+
+}
+
+.tab UL {
+    zoom: 1;
+    clear: both;
+}
+
+.tab UL:after {
+    display: block;
+    height: 0px;
+    visibility: hidden;
+    clear: both;
+    content: "";
+}
+
+.tab UL LI {
+    text-align: center;
+    line-height: 51px;
+    width: 236px;
+    display: inline;
+    background: #fff;
+    float: left;
+    height: 51px;
+    color: #000;
+    border-right: 1px #e5e5e5 solid;
+    border-bottom: 1px #e5e5e5 solid;
+    cursor: pointer;
+    font-size: 16px;
+
+}
+
+.tab UL LI.on {
+    background: #fff;
+    color: #000;
+    border-bottom: 2px #3782e7 solid;
+}
+
+.tabList {
+    overflow: hidden;
+
+}
+
+.tabList .tab_1 {
+    width: 580px; /*height:630px;*/
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 70px;
+}
+
+.tabList .one {
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: none;
+    /*height:630px;*/
+    overflow: hidden;
+    padding-top: 10px;
+}
+
+.tabList .block {
+    display: block;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "微软雅黑", "宋体", "黑体";
+}
+
+input.input_word {
+    width: 345px;
+    height: 50px;
+    line-height: 50px;
+}
+
+.all {
+    width: 563px;
+    height: 50px;
+    border: 1px #e3e3e3 solid;
+    float: left;
+    background: #fafafa;
+}
+
+.all .icon {
+    width: 100px;
+    height: 35px;
+    border: none;
+    border-right: 1px #e3e3e3 solid;
+    float: left;
+    vertical-align: middle;
+    display: table-cell;
+    padding-top: 15px;
+    text-align: center;
+    color: #454545;
+}
+
+.all .input_word {
+    width: 460px;
+    height: 50px;
+    line-height: 50px;
+    border: none;
+    float: left;
+    font-size: 14px;
+    color: #878787;
+    text-indent: 10px;
+    background: #fafafa;
+}
+
+.star {
+    width: 13px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #F00;
+    float: left;
+}
+
+.huoquyanzhengma {
+    background: url(../img/btn_zhuce.png) 0 -100px no-repeat;
+    width: 166px;
+    height: 57px;
+    line-height: 57px;
+    text-align: center;
+    float: left;
+    font-size: 16px;
+    color: #2d2d2d;
+    text-decoration: none;
+}
+
+.yanzhengma {
+    background: url(../img/yanzhengma.png) no-repeat;
+    width: 166px;
+    height: 57px;
+    border: 1px #999 solid;
+    line-height: 57px;
+    text-align: center;
+    float: left;
+    font-size: 16px;
+    color: #2d2d2d;
+    cursor: pointer;
+    text-indent: 80px;
+    color: #31225c;
+    font-size: 14px;
+}
+
+.btn {
+    width: 406px;
+    height: 50px;
+    background: url(../img/btn_zhuce.png) no-repeat;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    font-family: "微软雅黑", "宋体", "黑体";
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-position: 0 -50px;
+}
+
+.table_word {
+    font-size: 14px;
+    line-height: 50px;
+}
+
+.table_word a {
+    text-decoration: none;
+}
+
+.textarea_star {
+    color: #f00;
+    float: left;
+    margin-top: 13px;
+    margin-left: 3px;
+}
+
+.wap_right2 {
+    width: 580px;
+    overflow: hidden;
+}
+
+.wap_right2 textarea {
+    width: 534px;
+    height: 180px;
+    display: block;
+    padding: 10px 10px 10px 20px;
+    border: 1px #e3e3e3 solid;
+    color: #7c7c7c;
+    margin-top: 5px;
+    float: left;
+}
+
+.wap_right2 .shuruzishu {
+    overflow: hidden;
+    font-size: 14px;
+    color: #a0a0a0;
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.wap_right2 .shuruzishu font {
+    color: #3782e7;
+}
+
+.btn_queren {
+    display: block;
+    text-align: center;
+    width: 570px;
+    height: 50px;
+    background: #3782e7;
+    text-decoration: none;
+    line-height: 50px;
+    color: #fff;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.btn_queren:hover {
+    background: #005aff;
+}
+
+.touxiang img {
+    width: 64px;
+    height: 64px
+}
+.top_touxiang .touxiang img {
+    width: 158px;
+    height: 158px
+}
+.zhaopian1 img {
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+}

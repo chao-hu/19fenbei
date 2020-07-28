@@ -1,0 +1,75 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: chao
+ * Date: 15-1-20
+ * Time: 下午11:16
+ */
+
+class Constant
+{
+
+    // 通用status字段值
+    CONST STATUS_DEFAULT = 0;
+    CONST STATUS_DEFAULT_MSG = "待审核";
+
+    CONST STATUS_AUDITED_PASS = 1;
+    CONST STATUS_AUDITED_PASS_MSG = "审核通过";
+
+    CONST STATUS_AUDITED_FAIL = -1;
+    CONST STATUS_AUDITED_FAIL_MSG = "审核未通过";
+
+    CONST STATUS_ON = 1;
+    CONST STATUS_ON_MSG = "启用";
+
+    CONST STATUS_OFF = -1;
+    CONST STATUS_OFF_MSG = "未启用";
+
+    // sms 相关
+    CONST SMS_ONE_USER_SEND_TIMES = 10; //一人一天最多10条短信
+    CONST SMS_ONE_USER_INTERVAL = 90; //发送间隔为90秒
+    CONST SMS_CODE_EXPIRATION_TIME = 600; // 短信验证码10分钟有效
+
+    CONST SMS_STATUS_DEFAULT = 0;
+    CONST SMS_STATUS_DEFAULT_MSG = "未发送";
+
+    CONST SMS_STATUS_SEND = 1;
+    CONST SMS_STATUS_SEND_MSG = "已发送";
+
+    CONST SMS_STATUS_SEND_FAIL = -1;
+    CONST SMS_STATUS_SEND_FAIL_MSG = "发送失败";
+
+    CONST SMS_STATUS_SEND_OK = 2;
+    CONST SMS_STATUS_SEND_OK_MSG = "发送成功";
+
+
+    // 支付相关常量
+    CONST ORDER_TIMEOUT = 86400; // 一天支付时间, 过期自动取消订单
+
+    CONST STATUS_ORDER_DEFAULT = 'unpay';
+    CONST STATUS_ORDER_DEFAULT_MSG = "待支付";
+
+    CONST STATUS_ORDER_PAYED = 'paid';
+    CONST STATUS_ORDER_PAYED_MSG = "已支付";
+
+    CONST STATUS_ORDER_UNSEND = 'unsend';
+    CONST STATUS_ORDER_UNSEND_MSG = "未发货";
+
+    CONST STATUS_ORDER_SEND = 'send';
+    CONST STATUS_ORDER_SEND_MSG = "已发货";
+
+    CONST STATUS_ORDER_RECEIVED = 'received';
+    CONST STATUS_ORDER_RECEIVED_MSG = "已收货";
+
+    CONST STATUS_ORDER_USER_CANCEL = 'user_cancel';
+    CONST STATUS_ORDER_USER_CANCEL_MSG = "用户取消";
+
+    CONST STATUS_ORDER_TIMEOUT_CANCEL = 'timeout_cancel';
+    CONST STATUS_ORDER_TIMEOUT_CANCEL_MSG = "超时取消";
+
+    CONST STATUS_ORDER_SERVER_CANCEL = 'server_cancel';
+    CONST STATUS_ORDER_SERVER_CANCEL_MSG = "服务端取消";
+
+
+
+}

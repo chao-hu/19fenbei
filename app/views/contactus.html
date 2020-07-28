@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}
+联系我们_19分贝
+{% endblock %}
+{% block keywords %}
+十九分贝门窗 地址:北京市昌平区回龙观镇科星西路106号院国风美唐6号楼1406室 网址:http://www.19fenbei.com/ 电话:4006-1949-19  400电话:4006-1949-19 邮编:102209
+{% endblock %}
+{% block description %}
+19分贝门窗位于昌平区回龙观镇国风美唐。
+{% endblock %}
+{% block content %}
+<style>
+
+    .lx_map{ float:right; margin-right:10px; width:748px; height:1090px; background:url(../img/lx_map.png) #fff no-repeat; position:relative;}
+    .lx_map .chakanbaidu{ display:block; width:194px; height:50px; background:url(../img/chaikanbaidu.png) no-repeat; position:absolute; left:100px; bottom:77px;}
+    .word_wenzi{ width:610px; height:245px; overflow:hidden; position:absolute;top:705px; left:65px;}
+    .inner_word{ margin-top:27px;}
+    .inner_word span{ color:#6b6e7b; font-size:16px; line-height:30px; display:block;}
+
+</style>
+      <div id="yangguangfangcanshu">
+          
+          
+      
+          <div class="canshuneirong">
+          	<div class="middle" style="padding-top:42px; padding-bottom:200px;">
+                <ul class="lx_tab">
+                    <li><a href="/about">关于19分贝</a></li>
+                    <li><a href="/joinus">加入我们</a></li>
+                    <li><a href="#" class="hover">联系我们</a></li>
+                </ul>
+
+                <div class="lx_map"style="margin-top:-3px;height:1090px; ">
+                    <div class="word_wenzi">
+                        <span style=" color:#2085da; font-size:24px; line-height:39px; ">北京十九分贝门窗有限公司</span><br />
+                        <span style=" color:#acacac; font-size:13px; line-height:20px; ">BEIJING 19dB WINDOWS AND DOORS CO.LTD.</span>
+                        <div style="" class="inner_word">
+                            <span>客服热线：{{site.tel400}}</span>
+                            <span>电话：{{site.tel}}</span>
+                            <span>公司地址：{{site.address}}</span>
+                            <span>邮政编码：{{site.post}}</span>
+                            <span>邮箱：{{site.email}}</span>
+                        </div>
+                    </div>
+                    <a target="_blank" href="http://map.baidu.com/?newmap=1&ie=utf-8&s=s%26wd%3D%E9%A6%96%E5%BC%80%E5%9B%BD%E9%A3%8E%E7%BE%8E%E5%94%90" class="chakanbaidu"></a>
+                </div>
+            </div>
+          </div>
+          
+      </div>
+{% endblock %}

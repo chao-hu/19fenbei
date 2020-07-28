@@ -1,0 +1,340 @@
+{% extends "layout.html" %}
+{% block title %}
+用户评价_19分贝
+{% endblock %}
+{% block keywords %}
+用户评价 断桥铝门窗 晒单 评论 价格 服务 质量
+{% endblock %}
+{% block description %}
+19分贝断桥铝门窗，具有隔音、保温、隔热、环保等特点。
+{% endblock %}
+{% block content %}
+<link href="/css/comment.css" rel="stylesheet">
+
+<script type="text/javascript" src="/city/jquery.cityselect.js"></script>
+
+<script type="text/javascript" src="js/jquery.form.js"></script>
+
+<script>
+
+    // 图片上传相关
+    $(function () {
+        var files = $("#thelist");
+        var btn = $(".btn span");
+        $("#fileupload").wrap("<form id='myupload' action='/member/comment/photo' method='post' enctype='multipart/form-data'></form>");
+        $("#fileupload").change(function () {
+            $("#myupload").ajaxSubmit({
+                dataType: 'json',
+                beforeSend: function () {
+
+                    var rExt = /\.([^.]+)$/;
+                    var ext = rExt.exec($("#fileupload").val()) ? RegExp.$1.toLowerCase() : '';
+
+                    var reg = /(jpg|jpeg|png|gif|bmp)/;
+                    if (!reg.test(ext)) {
+                        btn.html("格式不对");
+                        return false;
+                    }
+                },
+                uploadProgress: function (event, position, total, percentComplete) {
+
+                },
+                success: function (data) {
+                    if (data && data.error_code == 0) {
+                        files.append('<li><a class="li_2" href="javascript:void(0);"><img src="' + data.src + '" width=52 height=52></a></li>');
+                        btn.html("添加");
+                    } else {
+                        btn.html("上传失败");
+                    }
+
+                    var num = $("#thelist > li").size();
+                    $(".shuru > font").text(5 - num);
+                    if ($("#thelist > li").size() >= 5) {
+                        $("#fileupload").attr('disabled', 'true');
+                    } else {
+                        $("#fileupload").removeAttr('disabled');
+                    }
+                    var imgs = [];
+                    $("#thelist > li >a> img").each(function (i) {
+                        imgs.push($(this).attr('src'));
+                    });
+
+                    $("#imgs").val(imgs.join(','));
+                },
+                error: function (xhr) {
+                    btn.html("上传失败");
+                }
+            });
+        });
+
+        $(".delimg").on('click', function () {
+            var pic = $(this).attr("rel");
+            $.post("action.php?act=delimg", {imagename: pic}, function (msg) {
+                if (msg == 1) {
+                    files.html("删除成功.");
+                    showimg.empty();
+                    progress.hide();
+                } else {
+                    alert(msg);
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () {
+
+        $("#city").citySelect({
+            url: '/city/bj.js',
+            prov: "{% if address.prov %}{{address.prov}}{%else%}{%endif%}",
+            city: "{% if address.city %}{{address.city}}{%else%}{%endif%}",
+            dist: "{% if address.dist %}{{address.dist}}{%else%}{%endif%}",
+            nodata: "none"
+        });
+
+        // 描述字数计算
+        $("#content").keyup(
+                function () {
+                    var maxLength = 500;
+
+                    var len = $("#content").val().length;
+                    var allowLen = maxLength - len;
+                    if (allowLen >= 0) {
+                        $(".shuruzishu > font").text(allowLen);
+                        $("#comment_post").attr("disabled", false);
+                        // 可以继续执行其他操作
+                    } else {
+                        $(".shuruzishu > font").text(allowLen);
+                        $("#comment_post").attr("disabled", true);
+                        return false;
+                    }
+                }
+        );
+
+        $('#comment_post').click(function () {
+
+            if ($("#product").val() == '') {
+
+                Dialog.alert("产品不能为空");
+                return false;
+            }
+            if ($("#area").val() == '') {
+
+                Dialog.alert("面积不能为空");
+                return false;
+            }
+
+            if ($("#total_pricw").val() == '') {
+
+                Dialog.alert("总价不能为空");
+                return false;
+            }
+            if ($("#housing_estate").val() == '' || $("#housing_estate").val() == '如果不填此项，系统默认用"其它"代替') {
+
+                $("#housing_estate").val('其他')
+            }
+
+            if ($("#content").val() == '' || $("#content").val() == '请输入您的评论内容：') {
+
+                $("#content").val('')
+            }
+
+            var forms = $('#comment_form').serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/member/comment',
+                data: forms,
+                success: function (msg) {
+                    msg = eval('(' + msg + ')');
+                    if (msg.error_code == 0) {
+
+                        Dialog.alert("评论成功");
+                    } else {
+                        Dialog.alert("修改失败, " + msg.error_msg);
+                    }
+                }
+            });
+            return false;
+        })
+
+
+        // 点击图片看大图
+
+        $(".zhaopian1 > img").on('click', function () {
+
+            var url = $(this).attr('src')
+            var w = window.open();
+            setTimeout(function () {
+                w.location = url;
+            }, 1000);
+
+            return false;
+        })
+    })
+
+</script>
+
+
+<div id="pinglun_wap">
+    <div class="main_middle">
+        <div class="title"><span class="shaidan">评论晒单</span><span class="total">Total:<font>{{total}}</font></span>
+        </div>
+        {% if userinfo.id %}
+
+        <div class="zong_wap">
+            <div class="wap_left" id="table_wap">
+                <form id="comment_form">
+                    <input name="form_hash" type="hidden" value="{{form_hash}}">
+                    <table width="400" height="440" style=" float:left; margin-top:-14px;">
+                        <tr>
+                            <td colspan="2">
+                                <div class="all">
+                                    <div class="icon icon1">产品类型</div>
+                                    <div class="control_select">
+                                        <select class="input_word" id="product" name="product">
+                                            <option value="阳光房">阳光房</option>
+                                            <option value="门窗">门窗</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="all">
+                                    <div class="icon icon2">面 积(m²)</div>
+                                    <div><input type="text" onFocus="this.value='';" id="area" value="" name="area"
+                                                class="input_word"/></div>
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2">
+                                <div class="all">
+                                    <div class="icon icon2">总 价(元)</div>
+                                    <div><input type="text" onFocus="this.value='';" value="" name="total_price"
+                                                class="input_word"/></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="236">
+                                <div class="all">
+                                    <div class="icon icon3">所在城市</div>
+                                    <div id="city">
+                                        <div><select class="input_word prov" id="comment_prov" name="prov"
+                                                     style="width:100px;">
+                                        </select></div>
+                                        <div><select class="input_word city" id="comment_city" name="city"
+                                                     style="width:100px;">
+                                        </select></div>
+                                        <div><select class="input_word dist" id="comment_dist" name="dist"
+                                                     style="width:102px;">
+                                        </select></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="all">
+                                    <div class="icon icon4">所在小区</div>
+                                    <div><input type="text" onFocus="this.value='';" id="housing_estate"
+                                                name="housing_estate"
+                                                value='如果不填此项，系统默认用"其它"代替' name="input_word" class="input_word"/>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+            </div>
+            <div class="wap_right">
+                <div class="pinglun_content">
+                    <textarea id="content" name="content">请输入您的评论内容：</textarea>
+                </div>
+                <input id="imgs" name="imgs" type="hidden" value="">
+                </form>
+                <div class="shuruzishu">还可以输入<font>500</font>个字。</div>
+                <div class="zhaopian">
+                    <div class="top"><span class="sdzp">晒单照片</span>
+
+                        <div class="fbtn">
+                            <span>添加</span>
+                            <input id="fileupload" type="file" name="mypic">
+                        </div>
+                        <span class="shuru">还可以添加<font>5</font>张图片</span></div>
+                    <ul class="content" id="thelist">
+                        <!-- <li><a class="li_2" href="javascript:void(0);"></a></li> -->
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+
+        <button type="button" class="tijiaoBtn" id="comment_post">提交留言</button>
+        {% endif %}
+
+        {% for comment in comments %}
+
+
+        <div class="pinglun_neirong">
+            <div class="left">
+                <div class="touxiang"><img src="{{comment.user.photo}}"></div>
+                <div class="dianhua">{{comment.user.name}}</div>
+                <div class="fenzhong">{{comment.strtime}}</div>
+                <!-- <div class="zan"></div>
+                <div class="zanshu">388个攒</div> -->
+            </div>
+            <div class="right">
+                <div class="top">
+                    <ul>
+                        <li class="li_1">类型：<font>{{comment.product}}</font></li>
+                        <li class="li_2">面积：<font>{{comment.area}}m²</font></li>
+                        <li class="li_3">总价：<font>{{comment.total_price}}RMB</font></li>
+                        <li class="li_4">城市：<font>{{comment.prov}} {{comment.city}}</font></li>
+                        <li class="li_5">小区：<font>{{comment.dist}} {{comment.housing_estate}}</font></li>
+
+                    </ul>
+
+                </div>
+                <div class="content">
+                    <div class="word">
+                        {{comment.content}}
+                    </div>
+                    {% if comment.images %}
+
+                    <div class="zhaopian">
+                        {% for img in comment.images %}
+                        <div class="zhaopian1"><img src="{{img.image}}" title="点击查看大图"></div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if comment.reply %}
+                    <div class="bottom">
+                        <div class="touxiang"></div>
+                        <div class="contenthuifu">
+                            <span>19分贝回复</span><br/>
+                            <font>{{comment.reply.reply}}</font>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+</div>
+{% endblock %}

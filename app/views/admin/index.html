@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="panel-fit"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>SMS用户发送平台</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+    <link href="/admin/main.css" rel="stylesheet" type="text/css">
+    <link href="/admin/easyui.css" rel="stylesheet" type="text/css">
+    <link href="/admin/icon.css" rel="stylesheet" type="text/css">
+    <script src="/admin/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/admin/jquery.easyui.min.js" type="text/javascript"></script>
+    <script src="/admin/easyui-lang-zh_CN.js" type="text/javascript"></script>
+    <script src="/admin/index.js" type="text/javascript"></script>
+</head>
+<body class="easyui-layout layout">
+<div class="panel layout-panel layout-panel-north" style="left: 0px; top: 0px; width: 1366px;"><div data-options="region:&#39;north&#39;,split:false" style="height: 92px; overflow: hidden; width: 1364px;" title="" class="panel-body panel-body-noheader layout-body">
+    <div class="header_bg">
+        <div class="header">
+            <div class="header_1">
+                <img src="/admin/top.png">
+            </div>
+            <div class="header_r">
+                <ul class="nav">
+                    <li>
+                        <img src="/admin/index_09.png" class="nav_img"><span id="currentUser">1048418244</span></li>
+                    <li>
+                        <img src="/admin/index_10.png" class="nav_img"><a href="javascript:void(0);" src="BackMain/YH_MainMange.aspx" class="cs-navi-tab"> 后台首页</a></li>
+                    <li>
+                        <img src="/admin/index_11.png" class="nav_img">
+                        <a href="javascript:void(0);" src="SendMsg/YESY.htm" class="cs-navi-tab">余额查询</a></li>
+                    <li>
+                        <img src="/admin/index_12.png" class="nav_img"><a href="javascript:void(0);" onclick="openEditPassword();">修改密码</a></li>
+                    <li class="quit">
+                        <img src="/admin/index_13.png" class="nav_img"><a href="javascript:void(0);" onclick="logout();">退
+                        出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div></div>
+<div class="panel layout-panel layout-panel-west layout-split-west" style="left: 0px; top: 94px; width: 169px;"><div data-options="region:&#39;west&#39;,split:true" class="l_opareContent panel-body panel-body-noheader layout-body panel-noscroll" id="divUL" title="" style="width: 167px; height: 571px;">
+    <div class="easyui-accordion accordion accordion-noborder" data-options="fit:true,border:false" style="background-color: rgb(238, 241, 248); width: 167px; height: 571px;">
+        <div class="panel" style="width: 167px;"><div class="panel-header accordion-header accordion-header-selected" style="height: 15px; width: 157px;"><div class="panel-title">发送短信</div><div class="panel-tool"><a class="accordion-collapse" href="javascript:void(0)"></a></div></div><div title="" data-options="selected:true" id="userManage" class="panel-body accordion-body" style="display: block; width: 167px; height: 493px;">
+            <ul class="sidecon" style="">
+                <li><a href="javascript:void(0);" src="BackMain/YH_MainMange.aspx" class="cs-navi-tab">
+                    后台首页</a></li>
+                <li><a href="javascript:void(0);" src="SendMsg/SendMsg.htm" class="cs-navi-tab">发送短信</a></li>
+                <li><a href="javascript:void(0);" src="TongXunLu/TongXunLu.htm" class="cs-navi-tab">通讯录管理</a></li>
+            </ul>
+        </div></div>
+        <div class="panel" style="width: 167px;"><div class="panel-header accordion-header" style="height: 15px; width: 157px;"><div class="panel-title">信息管理</div><div class="panel-tool"><a class="accordion-collapse accordion-expand" href="javascript:void(0)"></a></div></div><div title="" data-options="selected:false" class="panel-body accordion-body" id="" style="display: none; width: 167px; height: 493px;">
+            <ul class="sidecon" style="">
+                <li><a href="javascript:void(0);" src="DaiShenHe/DaiShenHe.htm" class="cs-navi-tab">
+                    待发送</a></li>
+                <li><a href="javascript:void(0);" src="FaSongWanCheng/FaSongWanCheng.htm" class="cs-navi-tab">
+                    已发送</a></li>
+                <li><a href="javascript:void(0);" src="YiQuXiao/YiQuXiao.htm" class="cs-navi-tab">
+                    已取消</a></li>
+                <li><a href="javascript:void(0);" src="FaSongShiBai/FaSongShiBai.htm" class="cs-navi-tab">
+                    发送失败</a></li>
+                <li><a href="javascript:void(0);" src="WeiTongGuoShenHe/WeiTongGuoShenHe.htm" class="cs-navi-tab">
+                    未通过审核</a></li>
+            </ul>
+        </div></div>
+        <div class="panel" style="width: 167px;"><div class="panel-header accordion-header" style="height: 15px; width: 157px;"><div class="panel-title">系统管理</div><div class="panel-tool"><a class="accordion-collapse accordion-expand" href="javascript:void(0)"></a></div></div><div title="" data-options="selected:false" class="panel-body accordion-body" id="" style="display: none; width: 167px; height: 493px;">
+            <ul class="sidecon" style="">
+                <li><a href="javascript:void(0);" src="BackMain/HistoryGGhtm.htm" class="cs-navi-tab">
+                    历史通告查询</a></li>
+                <li><a href="javascript:void(0);" src="CreditLog/CreditLog.htm" class="cs-navi-tab">
+                    我的充值记录</a></li>
+                <li><a href="javascript:void(0);" onclick="loadMyInfo();">我的信息</a></li>
+                <li><a href="javascript:void(0);" src="SendMsg/YESY.htm" class="cs-navi-tab">余额查询</a></li>
+                <li><a href="javascript:void(0);" onclick="lianXi();">充值联系</a></li>
+                <li><a href="javascript:void(0);" onclick="openEditPassword();">修改密码</a></li>
+            </ul>
+        </div></div>
+    </div>
+</div></div>
+<div class="panel layout-panel layout-panel-center" style="left: 170px; top: 94px; width: 1196px;"><div data-options="region:&#39;center&#39;" title="" style="overflow: hidden; width: 1194px; height: 571px;" class="panel-body panel-body-noheader layout-body panel-noscroll">
+    <div id="tabs" class="easyui-tabs tabs-container" data-options="fit:true,border:false" style="width: 1194px; height: 571px;"><div class="tabs-header tabs-header-noborder" style="width: 1194px;"><div class="tabs-scroller-left" style="display: none;"></div><div class="tabs-scroller-right" style="display: none;"></div><div class="tabs-wrap" style="margin-left: 0px; left: 0px; width: 1194px;"><ul class="tabs"><li class="tabs-selected"><a href="javascript:void(0)" class="tabs-inner"><span class="tabs-title tabs-closable">后台首页</span><span class="tabs-icon"></span></a><a href="javascript:void(0)" class="tabs-close"></a></li></ul></div></div><div class="tabs-panels tabs-panels-noborder" style="height: 542px; width: 1194px;">
+        <div class="panel" style="display: block; width: 1194px;"><div title="" class="panel-body panel-body-noheader panel-body-noborder" style="width: 1194px; height: 542px;"><iframe id="myfrm" scrolling="auto" frameborder="0" src="/admin/YH_MainMange.htm" style="width:100%;height:100%;"></iframe></div></div></div></div>
+</div></div>
+
+<div id="opareDIV" style="">
+
+
+
+</div>
+
+
+<div id="mm" class="easyui-menu cs-tab-menu menu-top menu" style="width: 120px; display: none; left: 0px; top: 0px;">
+    <div id="mm-tabupdate" name="" href="" class="menu-item" style="height: 20px;"><div class="menu-text">
+        刷新</div></div>
+    <div id="mm-tabclose" name="" href="" class="menu-item" style="height: 20px;"><div class="menu-text">
+        关闭</div></div>
+    <div id="mm-tabcloseother" name="" href="" class="menu-item" style="height: 20px;"><div class="menu-text">
+        关闭其他</div></div>
+    <div id="mm-tabcloseall" name="" href="" class="menu-item" style="height: 20px;"><div class="menu-text">
+        关闭全部</div></div>
+</div><div class="layout-split-proxy-h"></div><div class="layout-split-proxy-v"></div><div class="panel window" style="display: none; width: 338px; left: 508px; top: 133.5px; z-index: 9001;"><div class="panel-header panel-header-noborder window-header" style="width: 338px;"><div class="panel-title panel-with-icon">我的信息</div><div class="panel-icon icon-save"></div><div class="panel-tool"><a class="panel-tool-close" href="javascript:void(0)"></a></div></div><div id="divPingBiCi" class="easyui-window panel-noscroll panel-body panel-body-noborder window-body" data-options="title:&#39;我的信息&#39;,minimizable:false,collapsible:false,maximizable:false,iconCls:&#39;icon-save&#39;" style="width: 326px; height: 355px; padding: 5px;" title="">
+    <div class="easyui-layout layout" data-options="fit:true" style="width: 326px; height: 355px;">
+        <div class="panel layout-panel layout-panel-center" style="left: 0px; top: 0px; width: 326px;"><div data-options="region:&#39;center&#39;,border:false" style="padding: 10px; float: right; background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); width: 304px; height: 303px; background-position: initial initial; background-repeat: initial initial;" title="" class="panel-body panel-body-noheader panel-body-noborder layout-body">
+            <input type="hidden" id="customID">
+            <table width="300px" height="300px">
+                <tbody><tr style="height: 20px">
+                    <td align="right">
+                        公司名称：
+                    </td>
+                    <td align="left">
+                        <span id="cusCompanyName"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        姓名：
+                    </td>
+                    <td align="left">
+                        <span id="txtName"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        登录名：
+                    </td>
+                    <td align="left">
+                        <span id="txtLoginName"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        手机：
+                    </td>
+                    <td align="left">
+                        <span id="txtPhone"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        固话：
+                    </td>
+                    <td align="left">
+                        <span id="txtTel"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        传真：
+                    </td>
+                    <td align="left">
+                        <span id="txtFax"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        QQ：
+                    </td>
+                    <td align="left">
+                        <span id="txtQQ"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        Email：
+                    </td>
+                    <td align="left">
+                        <span id="txtEmail"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        地址：
+                    </td>
+                    <td align="left">
+                        <span id="txtAddress"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        注册时间：
+                    </td>
+                    <td align="left">
+                        <span id="txtTime"></span>
+                    </td>
+                </tr>
+                </tbody></table>
+        </div></div>
+        <div class="panel layout-panel layout-panel-south" style="left: 0px; top: 325px; width: 326px;"><div data-options="region:&#39;south&#39;,border:false" style="text-align: right; height: 20px; padding: 5px 0px; width: 326px;" title="" class="panel-body panel-body-noheader panel-body-noborder layout-body">
+            <a class="easyui-linkbutton l-btn" data-options="iconCls:&#39;icon-cancel&#39;" href="javascript:void(0)" onclick="ClosePingBiWindow()" id=""><span class="l-btn-left"><span class="l-btn-text icon-cancel" style="padding-left: 20px;">返回</span></span></a>
+        </div></div>
+        <div class="layout-split-proxy-h"></div><div class="layout-split-proxy-v"></div></div>
+</div></div><div class="window-shadow" style="display: none; left: 508px; top: 133.5px; z-index: 9000; width: 350px; height: 400px;"></div><div class="panel window" style="display: none; width: 288px; left: 533px; top: 158.5px; z-index: 9003;"><div class="panel-header panel-header-noborder window-header" style="width: 288px;"><div class="panel-title panel-with-icon">充值联系人</div><div class="panel-icon icon-save"></div><div class="panel-tool"><a class="panel-tool-close" href="javascript:void(0)"></a></div></div><div id="divChongZhiLianXi" class="easyui-window panel-noscroll panel-body panel-body-noborder window-body" data-options="title:&#39;充值联系人&#39;,minimizable:false,collapsible:false,maximizable:false,iconCls:&#39;icon-save&#39;" style="width: 276px; height: 305px; padding: 5px;" title="">
+    <div class="easyui-layout layout" data-options="fit:true" style="width: 276px; height: 305px;">
+        <div class="panel layout-panel layout-panel-center" style="left: 0px; top: 0px; width: 276px;"><div data-options="region:&#39;center&#39;,border:false" style="padding: 10px; background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); width: 254px; height: 253px; background-position: initial initial; background-repeat: initial initial;" title="" class="panel-body panel-body-noheader panel-body-noborder layout-body">
+            <input type="hidden" id="Hidden1">
+            <table>
+                <tbody><tr style="height: 20px">
+                    <td align="right">
+                        公司名称：
+                    </td>
+                    <td align="left">
+                        <span id="lianxiCompanyName"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        姓名：
+                    </td>
+                    <td align="left">
+                        <span id="lianxiName"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        手机：
+                    </td>
+                    <td align="left">
+                        <span id="lianxiPhone"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        固话：
+                    </td>
+                    <td align="left">
+                        <span id="lianxiTel"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        传真：
+                    </td>
+                    <td align="left">
+                        <span id="lianxiFax"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        QQ：
+                    </td>
+                    <td align="left">
+                        <span id="lianxiQQ"></span>
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        Email：
+                    </td>
+                    <td align="left">
+                        <span id="lianxiEmail"></span>
+                    </td>
+                </tr>
+                </tbody></table>
+        </div></div>
+        <div class="panel layout-panel layout-panel-south" style="left: 0px; top: 275px; width: 276px;"><div data-options="region:&#39;south&#39;,border:false" style="text-align: right; height: 20px; padding: 5px 0px; width: 276px;" title="" class="panel-body panel-body-noheader panel-body-noborder layout-body">
+            <a class="easyui-linkbutton l-btn" data-options="iconCls:&#39;icon-cancel&#39;" href="javascript:void(0)" onclick="CloseLianXiWindow()" id=""><span class="l-btn-left"><span class="l-btn-text icon-cancel" style="padding-left: 20px;">返回</span></span></a>
+        </div></div>
+        <div class="layout-split-proxy-h"></div><div class="layout-split-proxy-v"></div></div>
+</div></div><div class="window-shadow" style="display: none; left: 533px; top: 158.5px; z-index: 9002; width: 300px; height: 350px;"></div><div class="panel window" style="display: none; width: 288px; left: 533px; top: 243.5px; z-index: 9005;"><div class="panel-header panel-header-noborder window-header" style="width: 288px;"><div class="panel-title panel-with-icon">更改密码</div><div class="panel-icon icon-save"></div><div class="panel-tool"><a class="panel-tool-close" href="javascript:void(0)"></a></div></div><div id="divGengGai" class="easyui-window panel-noscroll panel-body panel-body-noborder window-body" data-options="title:&#39;更改密码&#39;,minimizable:false,collapsible:false,maximizable:false,iconCls:&#39;icon-save&#39;" style="width: 276px; height: 135px; padding: 5px;" title="">
+    <div class="easyui-layout layout" data-options="fit:true" style="width: 276px; height: 135px;">
+        <div class="panel layout-panel layout-panel-center" style="left: 0px; top: 0px; width: 276px;"><div data-options="region:&#39;center&#39;,border:false" style="padding: 10px; background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); width: 254px; height: 83px; background-position: initial initial; background-repeat: initial initial;" title="" class="panel-body panel-body-noheader panel-body-noborder layout-body">
+            <table>
+                <tbody><tr style="height: 20px">
+                    <td align="right">
+                        原密码：
+                    </td>
+                    <td align="left">
+                        <input type="password" id="oldPWD" style="width: 160px">
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        新密码：
+                    </td>
+                    <td align="left">
+                        <input type="password" id="newPWD" style="width: 160px">
+                    </td>
+                </tr>
+                <tr style="height: 20px">
+                    <td align="right">
+                        确认密码：
+                    </td>
+                    <td align="left">
+                        <input type="password" id="okPWD" style="width: 160px">
+                    </td>
+                </tr>
+                </tbody></table>
+        </div></div>
+        <div class="panel layout-panel layout-panel-south" style="left: 0px; top: 105px; width: 276px;"><div data-options="region:&#39;south&#39;,border:false" style="text-align: right; height: 20px; padding: 5px 0px; width: 276px;" title="" class="panel-body panel-body-noheader panel-body-noborder layout-body">
+            <a class="easyui-linkbutton l-btn" data-options="iconCls:&#39;icon-ok&#39;" href="javascript:void(0)" onclick="EditPassword()" id=""><span class="l-btn-left"><span class="l-btn-text icon-ok" style="padding-left: 20px;">更改</span></span></a> <a class="easyui-linkbutton l-btn" data-options="iconCls:&#39;icon-cancel&#39;" href="javascript:void(0)" onclick="closeGengGaiDIV()" id=""><span class="l-btn-left"><span class="l-btn-text icon-cancel" style="padding-left: 20px;">返回</span></span></a>
+        </div></div>
+        <div class="layout-split-proxy-h"></div><div class="layout-split-proxy-v"></div></div>
+</div></div><div class="window-shadow" style="display: none; left: 533px; top: 243.5px; z-index: 9004; width: 300px; height: 180px;"></div></body></html>

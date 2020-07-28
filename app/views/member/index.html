@@ -1,0 +1,429 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<link href="/css/member.css" rel="stylesheet">
+
+<script>
+
+    function setTab(name, m, n) {
+        for (var i = 1; i <= n; i++) {
+            var menu = document.getElementById(name + i);
+            var showDiv = document.getElementById("cont_" + name + "_" + i);
+            menu.className = i == m ? "on" : "";
+            showDiv.style.display = i == m ? "block" : "none";
+        }
+    }
+
+    var diag = new Dialog();
+    function popup_password() {
+        /*固定宽高的信息弹出窗*/
+        diag.Width = 520;
+        diag.Height = 425;
+        diag.Title = " ";
+        diag.URL = "/member/passwd";
+        diag.show();
+    }
+    function popup_touxiang() {
+        /*固定宽高的信息弹出窗*/
+        diag.Width = 733;
+        diag.Height = 1276;
+        diag.Title = " "
+        diag.URL = "/member/photo";
+        diag.show();
+    }
+
+    $(document).ready(function () {
+
+        // 描述字数计算
+        $("#description").keyup(
+                function () {
+                    var maxLength = 500;
+
+                    var len = $("#description").val().length;
+                    var allowLen = maxLength - len;
+                    if (allowLen >= 0) {
+                        $(".shuruzishu").html('还可以输入<font>' + allowLen + '</font>个字。');
+                        $("#member_post").attr("disabled", false);
+                        // 可以继续执行其他操作
+                    } else {
+                        $(".shuruzishu").html('还可以输入<font>' + allowLen + '</font>个字。');
+                        $("#member_post").attr("disabled", true);
+                        return false;
+                    }
+
+                }
+        );
+
+        // 用户信息表单
+        $('#member_post').click(function () {
+
+            if ($("#name").val() == '') {
+
+                Dialog.alert("姓名不能为空");
+                return false;
+            }
+            if ($("#email").val() == '') {
+
+                Dialog.alert("Email不能为空");
+                return false;
+            }
+
+            if ($("#description").val() == '') {
+
+                Dialog.alert("描述不能为空");
+                return false;
+            }
+
+            var forms = $('#member').serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/member',
+                data: forms,
+                success: function (msg) {
+                    msg = eval('(' + msg + ')');
+                    if (msg.error_code == 0) {
+
+                        $(".word").text($("#description").val());
+                        Dialog.alert("修改成功");
+                    } else {
+                        Dialog.alert("修改失败, " + msg.error_msg);
+                    }
+                }
+            });
+            return false;
+        })
+    });
+
+</script>
+
+<!-- 省市地址联动 -->
+<script type="text/javascript" src="/city/jquery.cityselect.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+        // 省市区联动
+        $("#city").citySelect({
+            url: '/city/bj.js',
+            prov: "{% if address.prov %}{{address.prov}}{%else%}{%endif%}",
+            city: "{% if address.city %}{{address.city}}{%else%}{%endif%}",
+            dist: "{% if address.dist %}{{address.dist}}{%else%}{%endif%}",
+            nodata: "none"
+        });
+
+        // 送货地址表单
+        $('#address_post').click(function () {
+
+            if ($("#address_name").val() == '') {
+
+                Dialog.alert("姓名不能为空");
+                return false;
+            }
+            if ($("#address_mobile").val() == '') {
+
+                Dialog.alert("mobile不能为空");
+                return false;
+            }
+
+            if ($("#address_prov").val() == '') {
+
+                Dialog.alert("省市不能为空");
+                return false;
+            }
+            if ($("#address_city").val() == '') {
+
+                Dialog.alert("区县不能为空");
+                return false;
+            }
+            if ($("#address_dist").val() == '') {
+
+                Dialog.alert("地区不能为空");
+                return false;
+            }
+            if ($("#address_street").val() == '') {
+
+                Dialog.alert("街道不能为空");
+                return false;
+            }
+
+
+            var forms = $('#address_form').serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/member/address',
+                data: forms,
+                success: function (msg) {
+                    msg = eval('(' + msg + ')');
+                    if (msg.error_code == 0) {
+
+                        Dialog.alert("修改成功");
+                    } else {
+                        Dialog.alert("修改失败, " + msg.error_msg);
+                    }
+                }
+            });
+            return false;
+        })
+
+
+        // 点击图片看大图
+        $(".zhaopian1 > img").on('click', function () {
+
+            var url = $(this).attr('src')
+            var w = window.open();
+            setTimeout(function () {
+                w.location = url;
+            }, 1000);
+
+            return false;
+        })
+    })
+
+</script>
+
+<div id="huiyuanzhongxin">
+<div class="main_middle">
+<div class="title_top">欢迎来您的个人中心</div>
+<div class="top_touxiang">
+    <div class="touxiang">
+        {% if userinfo.photo %}
+        <img src="{{userinfo.photo}}" width="158px" height="158px">
+        {% else %}
+        {% endif %}
+    </div>
+    <div class="xingming">
+        <table>
+            <tr>
+                <td>{{userinfo.name}}</td>
+                <td><!--<span></span>--></td>
+            </tr>
+        </table>
+    </div>
+    <div class="word">
+        {{userinfo.description}}
+    </div>
+    <div class="xiugai">
+        <a href="#" class="left" onClick="popup_password()">修改密码</a>
+        <a href="#" class="right" onClick="popup_touxiang()">修改头像</a>
+    </div>
+</div>
+<div class="tab_wap">
+<div class="wid180">
+<div class="tab">
+    <ul>
+        <li id="tow1" class="on" onclick='setTab("tow",1,4)'>基本资料</li>
+        <li id="tow2" onclick='setTab("tow",2,4)'>我的订单</li>
+        <li id="tow3" onclick='setTab("tow",3,4)'>收货地址</li>
+        <li id="tow4" onclick='setTab("tow",4,4)'>我的评价</li>
+    </ul>
+</div>
+<div class="tabList">
+    <div id="cont_tow_1" class="one block">
+        <div class="tab_1">
+            <div class="wap_left" id="table_wap">
+                <form method="post" action="/member" id="member">
+                    <input name="form_hash" type="hidden" value="{{form_hash}}">
+                    <table width="580" height="185" style=" float:left; ">
+                        <tr>
+                            <td colspan="2">
+                                <div class="all">
+                                    <div class="icon icon2">真实姓名</div>
+                                    <div><input type="text" value="{{userinfo.name}}" name="name" id="name"
+                                                class="input_word"/></div>
+
+                                </div>
+                                <!--<div class="star">*</div>-->
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td colspan="2">
+                                <div class="all">
+                                    <div class="icon icon2">联系电话</div>
+                                    <div><input type="text" value="{{userinfo.mobile}}" name="mobile" id="mobile"
+                                                class="input_word"
+                                                readonly/></div>
+
+                                </div>
+                                <div class="star">*</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="all">
+                                    <div class="icon icon2">电子邮箱</div>
+                                    <div><input type="text" value="{{userinfo.email}}" name="email" id="email"
+                                                class="input_word"/></div>
+
+                                </div>
+                                <div class="star">*</div>
+                            </td>
+                        </tr>
+                    </table>
+            </div>
+
+            <div class="wap_right2">
+
+                <textarea name="description" id="description">{{userinfo.description}}</textarea>
+
+                <div class="textarea_star">*</div>
+
+                <div class="shuruzishu">还可以输入<font>500</font>个字。</div>
+            </div>
+            <button class="btn_queren" type="button" id="member_post">确定保存</button>
+            </form>
+        </div>
+    </div>
+    <div id="cont_tow_2" class="one">
+        <div class="wodedingdan">
+            <table width="860" height="120" style="margin:0 auto;">
+                <tr>
+                    <td>
+                        <div class="dingdan_zhaopian"></div>
+                    </td>
+                    <td>
+                        <pre class="pre_word">产品类型：窗<br/>型材颜色：香槟色<br/>铝合金型材：65系列<br/>五金件：诺托<br/>玻璃：三层中空</pre>
+                    </td>
+                    <td>
+                        <pre class="pre_word">购买时间：<br/>2015-01-04<br/>18:33:56</pre>
+                    </td>
+                    <td>
+                        <pre class="pre_word">单价<span>：100元</span><br/>数量：<span>120份</span></pre>
+                    </td>
+                    <td><font>￥12000.00</font></td>
+                    <td><a href="#" class="btn">评价晒单</a></td>
+                </tr>
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="wodedingdan">
+            <table width="860" height="120" style="margin:0 auto;">
+                <tr>
+                    <td>
+                        <div class="dingdan_zhaopian"></div>
+                    </td>
+                    <td>
+                        <pre class="pre_word">产品类型：窗<br/>型材颜色：香槟色<br/>铝合金型材：65系列<br/>五金件：诺托<br/>玻璃：三层中空</pre>
+                    </td>
+                    <td>
+                        <pre class="pre_word">购买时间：<br/>2015-01-04<br/>18:33:56</pre>
+                    </td>
+                    <td>
+                        <pre class="pre_word">单价<span>：100元</span><br/>数量：<span>120份</span></pre>
+                    </td>
+                    <td><font>￥12000.00</font></td>
+                    <td><a href="#" class="yiping_btn">已评价</a></td>
+                </tr>
+            </table>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div id="cont_tow_3" class="one">
+        <div class="tab_1">
+            <form id="address_form">
+                <input name="form_hash" type="hidden" value="{{form_hash}}">
+
+                <div class="wap_left" id="table_wap">
+                    <table width="580" height="185" style=" float:left; ">
+                        <tr>
+
+                            <td colspan="2">
+                                <div class="all">
+                                    <div class="icon icon2">姓 名</div>
+                                    <div><input type="text" id="address_name" name="name"
+                                                value="1{% if address %}{{address.name}}{% else %}{{ userinfo.name }}{% endif %}"
+                                                class="input_word"/></div>
+
+                                </div>
+                                <div class="star">*</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="all">
+                                    <div class="icon icon2">联系电话</div>
+                                    <div><input type="text" id="address_mobile" name="mobile"
+                                                value="{% if address %}{{address.mobile}}{% else %}{{ userinfo.mobile }}{% endif %}"
+                                                class="input_word"/></div>
+
+                                </div>
+                                <div class="star">*</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="236">
+                                <div class="all">
+                                    <div class="icon icon3">收货地址</div>
+                                    <div id="city">
+                                        <select class="input_word prov" id="address_prov" name="prov"
+                                                style="width:154px;">
+
+                                        </select><select class="input_word city" id="address_city" name="city"
+                                                         disabled="disabled" style="width:154px;">
+
+                                    </select><select class="input_word dist" id="address_dist" name="dist"
+                                                     disabled="disabled" style="width:154px;">
+
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="star">*</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="wap_right2">
+                    <textarea name="street" id="address_street">{% if address %}{{address.street}}{% else %}请输入您的收货地址：{%
+                        endif %}</textarea>
+
+                    <div class="textarea_star">*</div>
+                </div>
+                <button class="btn_queren" type="button" id="address_post">确定保存</button>
+            </form>
+        </div>
+    </div>
+    <div id="cont_tow_4" class="one">
+        <a href="/comment" class="xiepingjia"></a>
+
+        <div id="pinglun_wap2">
+
+            {% for comment in comments %}
+            <div class="pinglun_neirong margin_top">
+                <div class="left">
+                    <div class="touxiang"><img src="{{comment.user.photo}}"></div>
+                    <div class="dianhua">{{comment.user.name}}</div>
+                    <div class="fenzhong">{{comment.strtime}}</div>
+                </div>
+                <div class="right">
+                    <div class="content">
+                        <div class="word">
+                            {{comment.content}}
+                        </div>
+
+                        {% if comment.images %}
+
+                        <div class="zhaopian">
+                            {% for img in comment.images %}
+                            <div class="zhaopian1"><img src="{{img.image}}" title="点击查看大图"></div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+
+{% endblock %}

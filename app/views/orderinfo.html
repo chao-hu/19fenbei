@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>购买</title>
+<link href="../css/main.css" rel="stylesheet">
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/zDialog.js"></script>
+<script type="text/javascript" src="../js/zDrag.js"></script>
+
+<script>
+window.onload=function(){
+	$("#second_wap").hide();
+	
+	$("#left_btn").click(function(){
+		
+		$("#first_wap").hide(1500);
+		$("#second_wap").show(1500);
+		});
+	$("#right_btn").click(function(){
+		$("#first_wap").show(1500);
+		$("#second_wap").hide(1500);
+		
+		});
+		
+	$(".logo").click(function(){
+		window.location.href="index.html";
+		});
+	}
+
+
+function popup_login()
+{
+	var diag = new Dialog();/*固定宽高的信息弹出窗*/
+	diag.Width = 520;
+	diag.Height = 416;
+	diag.Title = "  ";
+	diag.URL = "login.html";
+	diag.show();
+}
+function popup_register()
+{
+	var diag = new Dialog();/*固定宽高的信息弹出窗*/
+	diag.Width = 520;
+	diag.Height = 650;
+	diag.Title = "    ";
+	diag.URL = "register.html";
+	diag.show();
+}
+</script>
+</head>
+
+<body>
+      <div class="index_top">
+          <div class="index_top_middle">
+          	  <div class="logo"></div>
+              <div class="font">
+                  <span>首页</span>
+                  <span>窗</span>
+                  <span>阳光房</span>
+                  <span>用户评价</span>
+                  
+              </div>
+              <div class="button_group">
+                  <a href="#" class="buy">立即购买</a>
+                  <a href="#"  class="login" onClick="popup_login();"><span class="icon1"></span>登录</a>
+                  <a href="#"  class="register" onClick="popup_register();"><span class="icon2"></span>注册</a>
+              </div>
+          </div>
+      </div>
+      
+      <div  id="goumai_wap" >
+           <div class="main_middle">
+           		<div class="top_img"></div>
+                
+                <div class="shouhuoxinxi">收货信息</div>
+                <table class="xinxi_wap">
+                    <tr>
+                        <td>
+                            <font>姓名：</font><br />
+                            <input type="radio" />leiyang
+                        </td>
+                        <td>
+                            <font>详细地址</font>：<br />
+                            北京市 市辖区 西城区 马连道世纪茶贸中心
+                        </td>
+                        <td >
+                          <font>电话:</font><br />
+                          13521219826
+                        </td>
+                        <td class="wu">
+                          <span class="icon_bi"></span> 
+                        </td>
+                    </tr>
+                </table>   
+                
+                <div class="bot_line"></div>    
+                <div class="zhifufangshi">支付方式</div> 
+                <div class="zhifufangshi_wap">
+                    <div class="top"><input type="radio" />  平台支付</div>
+                    <div class="bottom"><input type="radio" style="float:left;" /> <span class="zhifubao"></span></div>
+                </div>   
+                <div class="dingdanzongji"><span class="zongji">订单总计：</span><span class="jine">$16000.00</span> <a href="#" class="xiayibu">下一步</a></div>
+           
+           
+           </div>
+         
+      </div>
+      
+      
+     <ul class="ul_list">
+         <li class="li_1">
+              <dl>
+                  <dt><a href="#"></a></dt>
+                  <dd class="title">价格体系</dd>
+                 <!--  <dd class="word">19 dB is the purpose of
+ manufacturing lines concise, easy to usedurable wood windows</dd>-->
+              </dl>
+         </li>
+         <li class="li_2">
+              <dl>
+                  <dt><a href="#"></a></dt>
+                  <dd class="title">购买流程</dd>
+                 <!--  <dd class="word">19 dB is the purpose of
+ manufacturing lines concise, easy to usedurable wood windows</dd>-->
+              </dl>
+         </li>
+         <li class="li_3">
+              <dl>
+                  <dt><a href="#"></a></dt>
+                  <dd class="title">支付方式</dd>
+                  <!-- <dd class="word">19 dB is the purpose of
+ manufacturing lines concise, easy to usedurable wood windows</dd>-->
+              </dl>
+         </li>
+         <li class="li_4 last">
+              <dl>
+                  <dt><a href="#"></a></dt>
+                  <dd class="title">售后服务</dd>
+                 <!-- <dd class="word">19 dB is the purpose of
+ manufacturing lines concise, easy to usedurable wood windows</dd>-->
+              </dl>
+         </li>
+         
+      
+      </ul>
+
+	 <div class="index_bottom">
+         <div class="index_bottom_middle">
+              <dl>
+                  <dt><a href="#">关于19分贝</a><font style="color:#d4d5d7; margin-left:7px; margin-right:7px;">丨</font><a href="#">加入我们</a><font style="color:#d4d5d7; margin-left:7px; margin-right:7px;">丨</font><a href="#">联系我们</a></dt>
+                  <dd class="dd_1">Copyright © 2013 - 2014 19fenbei.com</dd>
+                  <dd class="dd_2"><a class="img_1" href="#"></a><a class="img_2"  href="#"></a><a  class="img_3" href="#"></a><!--<a class="img_4"  href="#"></a><a class="img_5"  href="#"></a>--></dd>
+              
+              </dl>
+              
+              
+              <div class="erweima">
+                    <table>
+                    <tr> <td align="center"  width="76"> <div class="WeChat"></div></td><td align="center"  width="76"><div class="WeiBo"></div></td></tr>
+                    <tr> <td width="76" height="20" align="center" style="color:#fff; font-size:12px; line-height:20px; text-align:center;">[微信]</td><td width="76" height="20" align="center"  style="color:#fff; text-align:center;font-size:12px; ">[微博]</td></tr>
+                   
+                    
+                    </table>
+              </div>
+              
+              <div class="warpper">
+              <ul>
+                  <li class="zaixianzixun">在线咨询</li>
+                  <li class="big" style="font-size:26px; margin-top:12px;">400-888-6688</li>
+                  <li class="small">周一至周日 9:00-21:00</li>
+              </ul>
+              </div>
+         </div>
+     </div>
+
+
+
+</body>
+</html>

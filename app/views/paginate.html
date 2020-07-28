@@ -1,0 +1,29 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: huchao
+ * Date: 14-4-29
+ * Time: 下午6:20
+ **/
+
+
+{#
+p: curerntPage
+count: total page num
+total: total records
+urlName: slim url name
+#}
+{% macro paginate(p, count, total, urlName) %}
+
+总共{{ count }}页 {{ total }}条记录
+{% if p <= 1 %}
+{% else %}
+<span><a href='{{ urlFor(urlName, {"p": p-1}) }}'>上一页</a></span>
+{% endif %}
+
+{% if p < count %}
+<span><a href='{{ urlFor(urlName, {"p": p+1}) }}'>下一页</a></span>
+{% else %}
+{% endif %}
+
+{% endmacro %}

@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>修改密码</title>
+<style>
+*{ padding:0; margin:0;}
+body{font-family:"微软雅黑","宋体","黑体";}
+input.input_word{ width:345px; height:57px; line-height:57px;background:#fbfbfb; }
+.all{ width:420px; height:57px; border:1px #999 solid;float:left;}
+.all .icon{ width:61px; height:57px;border:none;  border-right:1px #999 solid; float:left; }
+.all .input_word{ width:420px; height:57px; line-height:57px; border:none; float:left; font-size:16px; color:#878787; text-indent:10px;font-family:"微软雅黑","宋体","黑体";}
+.star{ width:13px; height:57px; line-height:57px; text-align:center; color:#F00; float:left; }
+
+.huoquyanzhengma{background:url(../img/btn_zhuce.png) 0 -100px no-repeat; width:166px; height:57px; line-height:57px; text-align:center; float:left; font-size:16px; color:#2d2d2d; text-decoration:none; }
+.yanzhengma{background:url(../img/yanzhengma.png) no-repeat; width:166px; height:57px;border:1px #999 solid; line-height:57px; text-align:center; float:left; font-size:16px; color:#2d2d2d; cursor:pointer; text-indent:80px;color:#31225c; font-size:14px;}
+.btn{ width:422px; height:50px; background:#3782e7 no-repeat; font-size:20px; color:#fff; text-align:center; line-height:50px;font-family:"微软雅黑","宋体","黑体"; cursor:pointer;}
+.btn:hover{ background:#005aff;}
+
+.icon1{ background:url(../img/iconsss.png) 0 -0px #fbfbfb; no-repeat;}
+.icon2{ background:url(../img/iconsss.png) 0 -57px #fbfbfb; no-repeat;}
+.icon3{ background:url(../img/iconsss.png) 0 -114px #fbfbfb; no-repeat;}
+.icon4{ background:url(../img/iconsss.png) 0 -171px #fbfbfb; no-repeat;}
+.icon5{ background:url(../img/iconsss.png) 0 -228px #fbfbfb; no-repeat;}
+
+
+
+.table_word{ font-size:14px; line-height:57px;}
+.table_word a{ text-decoration:none; }
+.cuowu{ position:relative; font-size:12px; }
+.error{ width:100px; height:20px; line-height:20px; background:url(../img/xiugaimimatishi.png) no-repeat; text-indent:20px; color:#ff8400; position:absolute; right:10px; top:20px;}
+.title_top_66{ position:relative; width:518px; height:64px; background:url(../img/tanchu_top.png) repeat-x; border:1px #c1c1c1 solid; line-height:64px; text-align:center; color:#6d6d6d; font-size:28px;}
+</style>
+
+    <script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#submit').click(function(){
+
+                if ($("#password").val() == '' || $("#password").val() == "输入旧密码") {
+                    $("#error_msg").text("旧密码不能为空!");
+                    return false;
+                }
+                if ($("#pass1").val() == '' || $("#pass1").val() == "输入新密码") {
+                    $("#error_msg").text("新密码不能为空!");
+                    return false;
+                }
+                if ($("#pass2").val() == '' || $("#pass2").val() == "再次输入新密码") {
+                    $("#error_msg").text("确认密码不能为空!");
+                    return false;
+                }
+                if ($("#pass1").val() != $("#pass2").val()) {
+                    $("#error_msg").text("密码确认不对!");
+                    return false;
+                }
+
+                var forms=$('#password_form').serialize();
+                $.ajax({
+                    type:'POST',
+                    url:'/member/passwd',
+                    data:forms,
+                    success:function(msg){
+                        msg=eval('('+msg+')');
+                        if (msg.error_code == 0) {
+                            $("#error_msg").text("密码修改成功!");
+
+                            //setTimeout(function() {parent.window.location = '/member';}, 1000);
+                        } else {
+                            $("#error_msg").text(msg.error_msg);
+                        }
+                    }
+                });
+                return false;
+            })
+        });
+
+    </script>
+</head>
+
+<body>
+<div class="title_top_66">修改密码</div>
+<form method="post" id="password_form">
+    <input type="hidden" name="form_hash" value="{{form_hash}}">
+    <table width="430" height="300" style="margin:20px auto;">
+        <tr><td colspan="2" style="color: red" id="error_msg">
+            {{ flash['pwd_error'] ? flash['pwd_error'] :"" }}
+        </td></tr>
+        <tr><td colspan="2" >
+        	<div class="all cuowu">
+            	
+                <div><input type="text" value="输入旧密码" name="password" id="password" class="input_word" onFocus="this.value='';" /><!--<span class="error">原始密码错误</span>--></div>
+               
+            </div>
+             
+            </td></tr>
+        <tr><td colspan="2" >
+        	<div class="all">
+            	
+                <div><input type="text" value="输入新密码" onFocus="this.value='';" name="pass1" id="pass1" class="input_word"  /></div>
+               
+            </div>
+             
+            </td></tr>
+        
+        <tr><td colspan="2" >
+        	<div class="all">
+            	
+                <div><input type="text" value="再次输入新密码"  onFocus="this.value='';"  name="pass2" id="pass2" class="input_word" /></div>
+               
+            </div>
+             
+            </td></tr>
+          
+        <tr><td colspan="2">
+            <button class="btn" type="button" id="submit">确定修改</button>
+        
+        </td></tr>
+    
+    </table>
+</form>
+</body>
+</html>

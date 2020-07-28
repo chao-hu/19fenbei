@@ -1,0 +1,157 @@
+@charset "utf-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "微软雅黑", "宋体", "黑体";
+}
+
+input.input_word {
+    width: 345px;
+    height: 57px;
+    line-height: 57px;
+}
+
+.all {
+    width: 403px;
+    height: 57px;
+    border: 1px #e3e3e3 solid;
+    float: left;
+}
+
+.all .icon {
+    width: 100px;
+    height: 37px;
+    border: none;
+    border-right: 1px #e3e3e3 solid;
+    float: left;
+    vertical-align: middle;
+    display: table-cell;
+    padding-top: 20px;
+    text-align: center;
+    color: #454545;
+}
+
+.all .input_word {
+    width: 302px;
+    height: 57px;
+    line-height: 57px;
+    border: none;
+    float: left;
+    font-size: 14px;
+    color: #878787;
+    text-indent: 10px;
+}
+
+.star {
+    width: 13px;
+    height: 57px;
+    line-height: 57px;
+    text-align: center;
+    color: #F00;
+    float: left;
+}
+
+.huoquyanzhengma {
+    background: url(../img/btn_zhuce.png) 0 -100px no-repeat;
+    width: 166px;
+    height: 57px;
+    line-height: 57px;
+    text-align: center;
+    float: left;
+    font-size: 16px;
+    color: #2d2d2d;
+    text-decoration: none;
+}
+
+.yanzhengma {
+    background: url(../img/yanzhengma.png) no-repeat;
+    width: 166px;
+    height: 57px;
+    border: 1px #999 solid;
+    line-height: 57px;
+    text-align: center;
+    float: left;
+    font-size: 16px;
+    color: #2d2d2d;
+    cursor: pointer;
+    text-indent: 80px;
+    color: #31225c;
+    font-size: 14px;
+}
+
+.btn {
+    width: 406px;
+    height: 50px;
+    background: url(../img/btn_zhuce.png) no-repeat;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    font-family: "微软雅黑", "宋体", "黑体";
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-position: 0 -50px;
+}
+
+.table_word {
+    font-size: 14px;
+    line-height: 57px;
+}
+
+.table_word a {
+    text-decoration: none;
+}
+
+.fbtn {
+    position: relative;
+    overflow: hidden;
+    margin-right: 4px;
+    display: inline-block;
+    *display: inline;
+    padding: 4px 10px 4px;
+    font-size: 14px;
+    line-height: 18px;
+    *line-height: 20px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #5bb75b;
+    border: 1px solid #cccccc;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.fbtn input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    border: solid transparent;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+
+.touxiang img {
+    width: 64px;
+    height: 64px
+}
+
+.zhaopian1 img {
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+}

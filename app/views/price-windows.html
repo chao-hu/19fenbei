@@ -1,0 +1,440 @@
+{% extends "layout.html" %}
+{% block title %}
+门窗价格体系
+{% endblock %}
+
+{% block content %}
+        <style>
+            .lx_map{ float:right;  width:798px; background:url(../img/9windowjiagetixiBg.png) #fff no-repeat; position:relative; overflow:hidden; padding-top:265px; padding-bottom:200px;}
+            .table1 table{ width:100%;}
+            .table1 table tr td{ text-align:center; font-size:14px;}
+            .table1 table tr td:last-child{ color:#2085da;width:100px;}
+            .table1 table tr td:first-child{ width:100px;}
+            .table1 table tr td:nth-last-child(2){ width:100px;}
+            .table1 table tr td:nth-last-child(4){ width:100px;}
+            .table1 table tr td.gray{ color:#6a6a6a; width:290px;}
+            .table1 table tr td.gray2{ color:#6a6a6a; width:100px;}
+            .table1 table tr td.gray3{  width:100px;}
+            .table1 table tr td:nth-last-child(3){ width:100px;}
+        </style>
+
+        <script>
+
+            function total()
+            {
+                var totalObj = $("#9_btn > font");
+
+                var total = 0;
+                console.log("td num: " + $(".last_td").size());
+                $(".last_td").each(function() {
+                    console.log($(this).text());
+                    var price = parseFloat($(this).text());
+                    if (!isNaN(price)) {
+                        total = total + price;
+                    }
+                });
+                totalObj.text(total);
+                console.log('total: ' + total);
+            }
+
+            $(document).ready(function () {
+
+                $(".minus").on('click', function(event){
+
+                    var priceObj = $(this).parents("tr").children(".gray3");
+                    var price = parseFloat(priceObj.text());
+                    var numObj = $(this).parents("tr").find(":text");
+                    var num = (parseInt(numObj.val()) > 0) ? (parseInt(numObj.val()) - 1) : 0;
+                    numObj.val(num);
+
+                    var lastpriceObj = $(this).parents("tr").children(".last_td");
+                    var lastprice = price * num;
+                    lastpriceObj.text(lastprice);
+
+                    console.log(price + '|' + num);
+                    total();
+                    return false;
+                });
+
+                $(".plus").on('click', function(event){
+
+                    var priceObj = $(this).parents("tr").children(".gray3");
+                    var price = parseFloat(priceObj.text());
+                    var numObj = $(this).parents("tr").find(":text");
+                    var num = parseInt(numObj.val()) + 1;
+                    numObj.val(num);
+
+                    var lastpriceObj = $(this).parents("tr").children(".last_td");
+                    var lastprice = price * num;
+                    lastpriceObj.text(lastprice);
+
+                    console.log(price + '|' + num);
+                    total();
+                    return false;
+                });
+
+                $(":text").on('change', function(event) {
+
+                    var priceObj = $(this).parents("tr").children(".gray3");
+                    var price = parseFloat(priceObj.text());
+                    var numObj = $(this).parents("tr").find(":text");
+                    var num = parseInt(numObj.val());
+                    numObj.val(num);
+
+                    var lastpriceObj = $(this).parents("tr").children(".last_td");
+                    var lastprice = price * num;
+                    lastpriceObj.text(lastprice);
+
+                    console.log(price + '|' + num);
+                    return false;
+                });
+            })
+
+        </script>
+
+      <div id="yangguangfangcanshu">
+          
+          
+      
+          <div class="canshuneirong">
+          	<div class="middle" style="padding-top:42px; padding-bottom:200px;">
+                <ul class="lx_tab" style="width:165px;">
+         			<li><a href="/price-windows" class="hover">价格体系</a></li>
+                    <li><a href="/buy-help" >购买流程</a></li>
+                    <li><a href="/payment" >支付方式</a></li>
+                    <li><a href="/after-service" >售后服务</a></li>
+                </ul>
+                
+                <div class="lx_map table1" style="margin-top:-3px;">
+                    <a href="#" class="class_1"></a>
+                    <a href="/price-sunroom" class="class_2"></a>
+                    <a href="/price" class="class_3"></a>
+                    <!--<table class="top_table">
+                       <tr><td>项目</td><td>分类</td><td>单价/元</td><td>单位</td><td>数量</td><td>小计/元</td></tr>
+                    </table>-->
+                     <div class="bot_line"></div> 
+                    <table class="a_1_class" width="100%">
+                    <tr><td>项目</td><td>分类</td><td>单价/元</td><td>单位</td><td>数量</td><td style="color:#000;">小计/元</td></tr>
+                        <tr>
+                            <td rowspan="4" width="250"  style="text-align:center;">铝合金型材</td>
+                            <td class="gray" width="290" >19分贝60窗系列</td>
+                            <td width="100"  class="gray3" >240</td>
+                            <td width="40" class="gray2" >平米</td>
+                            <td width="120"  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0" id="num_1" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td  width="110" class="last_td" id="id_1"> 0</td>
+                        </tr>
+                        <tr>
+                            
+                            <td class="gray">19分贝70窗系列</td>
+                            <td  class="gray3" >460</td>
+                            <td class="gray2">平米</td>
+                            <td   class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_2" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_2"> 0</td>
+                        </tr>
+                        <tr>
+                           
+                            <td class="gray">19分贝60平开门系列</td>
+                            <td  class="gray3" >360</td>
+                            <td class="gray2">平米</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_3" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_3"> 0</td>
+                        </tr>
+                        <tr>
+                            
+                            <td class="gray">19分贝70平开门系列</td>
+                            <td  class="gray3" >600</td>
+                            <td class="gray2">平米</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0" id="num_4"  /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_4"> 0</td>
+                        </tr>
+                    </table>
+                     <div class="bot_line"></div> 
+                     
+                     
+                     <table class="a_1_class" width="100%">
+                   
+                        <tr>
+                            <td rowspan="2" style="text-align:center;">窗五金</td>
+                            <td class="gray">德国丝吉利娅平开/外开/下悬</td>
+                            <td  class="gray3" >360</td>
+                            <td class="gray2">套</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0" id="num_5"  /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_5"> 0</td>
+                        </tr>
+                        <tr>
+                            
+                            <td  class="gray">德国丝吉利娅平开上悬</td>
+                            <td  class="gray3" >480</td>
+                            <td class="gray2">套</td>
+                            <td   class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0" id="num_6"  /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_6"> 0</td>
+                        </tr>
+                        
+                    </table>
+                     <div class="bot_line"></div> 
+                     
+                      <table class="a_1_class" width="100%">
+                   
+                        <tr>
+                            <td style="text-align:center;">门五金</td>
+                            <td class="gray">德国丝吉利娅平开门五金</td>
+                            <td  class="gray3" >960</td>
+                            <td class="gray2">套</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0" id="num_7"  /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_7"> 0</td>
+                        </tr>
+                      
+                        
+                    </table>
+                     <div class="bot_line"></div> 
+                     
+                     
+					<table class="a_1_class" width="100%">
+          
+                        <tr>
+                            <td rowspan="4" style="text-align:center;">玻璃</td>
+                            <td class="gray">5mm+15A+5mm双层中空</td>
+                            <td  class="gray3" >180</td>
+                            <td class="gray2">平米</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_8" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_8"> 0</td>
+                        </tr>
+                        <tr>
+                            
+                            <td width="240" class="gray">5mm+9A+5mm+9A+5mm三层中空</td>
+                            <td  class="gray3" >260</td>
+                            <td class="gray2">平米</td>
+                            <td   class="gray3" width="150"><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_9"  /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_9"> 0</td>
+                        </tr>
+                        <tr>
+                           
+                            <td class="gray">5mm+15A+5mm双层中空钢化</td>
+                            <td  class="gray3" >260</td>
+                            <td class="gray2">平米</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0" id="num_10"  /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_10"> 0</td>
+                        </tr>
+                        <tr>
+                            
+                            <td class="gray">5mm+9A+5mm+9A+5mm三层中空钢化</td>
+                            <td  class="gray3" >340</td>
+                            <td class="gray2">平米</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0" id="num_11"  /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_11"> 0</td>
+                        </tr>
+                    </table>
+                     <div class="bot_line"></div> 
+                     
+                     <div class="kexuanxiangmu"></div>
+                        <div class="bot_line"></div>  
+					<table class="a_1_class" width="100%">
+          
+                        <tr>
+                            <td rowspan="3" style="text-align:center;">纱窗</td>
+                            <td class="gray">19分贝上下拉式隐形纱窗</td>
+                            <td  class="gray3" >180</td>
+                            <td class="gray2">个</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_12" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_12"> 0</td>
+                        </tr>
+                         <tr>
+                           
+                            <td class="gray">19分贝防盗隐形纱窗</td>
+                            <td  class="gray3" >360</td>
+                            <td class="gray2">个</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0" id="num_14"  /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_14"> 0</td>
+                        </tr>
+                        <tr>
+                            
+                            <td width="280" class="gray">19分贝304金刚网纱窗</td>
+                            <td  class="gray3" >480</td>
+                            <td class="gray2">个</td>
+                            <td  class="gray3"  width="150"><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_13" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_13"> 0</td>
+                        </tr>
+                       
+                        
+                    </table>
+                     <div class="bot_line"></div> 
+                     
+                     <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">纱门</td>
+                            <td class="gray">19分贝左右拉式纱门</td>
+                            <td  class="gray3" >560</td>
+                            <td class="gray2">个</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_15" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_15"> 0</td>
+                        </tr>   
+                         </table>
+                         <div class="bot_line"></div> 
+                        <table class="a_1_class" width="100%">
+                         <tr>
+                            <td  style="text-align:center;">立柱</td>
+                            <td class="gray">90度转角立柱或万向立柱</td>
+                            <td  class="gray3" >150</td>
+                            <td class="gray2">米</td>
+                               <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_23" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_23"> 0</td>
+                        </tr>  
+                         </table>
+                        <div class="bot_line"></div> 
+                        <table class="a_1_class" width="100%"> 
+                         <tr>
+                            <td  style="text-align:center;">副框</td>
+                            <td class="gray">型材配套副框</td>
+                            <td  class="gray3" >80</td>
+                            <td class="gray2">米</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_20" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_20"> 0</td>
+                        </tr>  
+                         </table>
+                    </table>
+                    
+                     <div class="bot_line"></div> 
+                        <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">Low-E玻璃</td>
+                            <td class="gray">高隔热Low-E玻璃</td>
+                            <td  class="gray3" >180</td>
+                            <td class="gray2">平米</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_16" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_16"> 0</td>
+                        </tr>      
+                    </table>
+                     <div class="bot_line"></div> 
+                      <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">夹胶玻璃</td>
+                            <td class="gray">5+0.76pvb+5夹胶玻璃</td>
+                            <td  class="gray3" >160</td>
+                            <td class="gray2">平米</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_21" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_21"> 0</td>
+                        </tr>      
+                    </table>
+                     <div class="bot_line"></div> 
+                      <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">玻璃圆孔</td>
+                            <td class="gray">玻璃挖圆孔</td>
+                            <td  class="gray3" >100</td>
+                            <td class="gray2">个</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_22" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_22"> 0</td>
+                        </tr>      
+                    </table>
+                    <div class="bot_line"></div> 
+
+                    <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">装饰条</td>
+                            <td class="gray">欧式/古典装饰铝条</td>
+                            <td  class="gray3" >120</td>
+                            <td class="gray2">平米</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_17" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_17"> 0</td>
+                        </tr>      
+                    </table>
+                     <div class="bot_line"></div> 
+                     
+                                                                  <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">木纹转印</td>
+                            <td class="gray">木纹色彩</td>
+                            <td  class="gray3" >160</td>
+                            <td class="gray2">平米</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0" id="num_18"  /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_18"> 0</td>
+                        </tr>      
+                    </table>
+                     <div class="bot_line"></div> 
+                    <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">异形</td>
+                            <td class="gray">弧形、圆形等异形</td>
+                            <td  class="gray3" >240</td>
+                            <td class="gray2">米</td>
+                            <td  class="gray3" ><div class="shuliang2"><a href="javascript:void(0);" class="minus"></a><input type="text" value="0"  id="num_19" /><a href="javascript:void(0);" class="plus"></a></div></td>
+                            <td class="last_td" id="id_19"> 0</td>
+                        </tr>      
+                    </table>
+                    
+                     <div class="bot_line"></div> 
+                     <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">中挺</td>
+                            <td class="gray">加强中挺型材</td>
+                            <td  class="gray3" >免费</td>
+                            <td class="gray2">米</td>
+                            <td ><div style="width:107px; height:35px;"></div></td>
+                            <td class="last_td"><div style="width:56px; height:35px;"></div></td>
+                        </tr>      
+                    </table>
+                     <div class="bot_line"></div> 
+                     <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">横梁</td>
+                            <td class="gray">横梁型材</td>
+                            <td  class="gray3" >免费</td>
+                            <td class="gray2">米</td>
+                            <td><div style="width:107px; height:35px;"></div></td>
+                            <td class="last_td"><div style="width:56px; height:35px;"></div></td>
+                        </tr>      
+                    </table>
+                     
+                     <div class="bot_line"></div> 
+                     
+                                               <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">定位器</td>
+                            <td class="gray">平开窗/平开上悬窗定位器</td>
+                            <td  class="gray3" >免费</td>
+                            <td class="gray2">个</td>
+                            <td><div style="width:107px; height:35px;"></div></td>
+                            <td class="last_td"><div style="width:56px; height:35px;"></div></td>
+                        </tr>      
+                    </table>
+                     <div class="bot_line"></div> 
+                     
+                     
+                     
+                  <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">打胶</td>
+                            <td class="gray">玻璃胶、发泡胶、密封胶</td>
+                            <td  class="gray3" >免费</td>
+                            <td class="gray2">平米</td>
+                            <td><div style="width:107px; height:35px;"></div></td>
+                            <td class="last_td"><div style="width:56px; height:35px;"></div></td>
+                        </tr>      
+                    </table>
+                     <div class="bot_line"></div> 
+                     
+                                      <table class="a_1_class" width="100%">
+                        <tr>
+                            <td  style="text-align:center;">型材色彩</td>
+                            <td class="gray">200多种型材色彩任选</td>
+                            <td  class="gray3" >免费</td>
+                            <td class="gray2">平米</td>
+                            <td><div style="width:107px; height:35px;"></div></td>
+                            <td class="last_td"><div style="width:56px; height:35px;"></div></td>
+                        </tr>      
+                    </table>
+                     <div class="bot_line"></div>  
+                     
+                     <div id="9_btn" style=" width:717px; height:95px; line-height:95px; text-align:center; color:#fff; font-size:30px; font-weight:bold; background:url(../img/9_btn.png) no-repeat; margin:0 auto; margin-top:50px;">
+                         <span style="font-weight:normal;">合计总价：</span><font>0.00</font>RMB
+                     </div>
+                     
+
+                     
+                </div>
+          	</div>
+          </div>
+          
+      </div>
+
+      {% endblock %}

@@ -1,0 +1,295 @@
+{% extends "layout.html" %}
+{% block title %}
+门窗购买_19分贝
+{% endblock %}
+{% block keywords %}
+断桥铝 门窗 购买 平米 单价 总价 配置 参数
+{% endblock %}
+{% block description %}
+19分贝项目经理测量后，选择相应的配置，购买相应的数量。
+{% endblock %}
+{% block content %}
+
+        <style>
+            .unuse{color:#ccc}
+        </style>
+<div id="xuanzegoumai_wap">
+<script>
+    function total() {
+        var totalObj = $("#total_text > font");
+        var total = 0;
+
+        var num = parseInt($("#num").val());
+        var price = parseFloat($("#price").text());
+        total = num * price;
+        totalObj.text(total);
+        $("#total").val(total);
+        console.log('total: ' + total);
+    }
+
+    $(document).ready(function () {
+
+        $(".minus").on('click', function (event) {
+
+            var numObj = $("#num");
+            var num = (parseInt(numObj.val()) > 0) ? (parseInt(numObj.val()) - 1) : 1;
+            numObj.val(num);
+
+            total();
+            return false;
+        });
+
+        $(".plus").on('click', function (event) {
+
+            var numObj = $("#num");
+            var num = parseInt(numObj.val()) + 1;
+            numObj.val(num);
+
+            total();
+            return false;
+        });
+
+    })
+
+</script>
+
+
+<div class="main_middle">
+<div class="index_main_middle_top_mian">
+    <div class="top_title">
+        <div class="windows"></div>
+        <a href="{{site.online_service}}" target="_blank" class="zaixianzixun"></a>
+        <a href="/buy-help" class="goumailiucheng"></a>
+    </div>
+    <div class="main_box">
+        <div class="main_box_left_win"></div>
+        <div class="main_box_right">
+            <form id="order" action="/buy" method="post">
+                <input type="hidden" name="product_name" value=""/>
+                <input type="hidden" name="price" value=""/>
+            <table width="500" height="550">
+                <tr align="left">
+                    <td>型 材 颜 色：</td>
+                    <td><input type="radio" name="attr[0]" value="香槟色"/>香槟色</td>
+                    <td><input type="radio" name="attr[0]" value="白色"/>白色</td>
+                    <td><input type="radio" name="attr[0]" value="其他颜色"/>其他颜色</td>
+
+                </tr>
+                <tr>
+                    <td style="height:20px;">铝合金型材：</td>
+                    <td><input type="radio" name="attr[1]" value="65系列"/>65系列</td>
+                    <td><input type="radio" name="attr[1]" value="75系列"/>75系列</td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>五 金 件：</td>
+                    <td><input type="radio" name="attr[2]" value="诺托"/>诺托</td>
+                    <td><input type="radio" name="attr[2]" value="丝吉利娅"/>丝吉利娅</td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>玻 璃：</td>
+                    <td><input type="radio" name="attr[3]" value="双层中空"/>双层中空</td>
+                    <td><input type="radio" name="attr[3]" value="三层中空"/>三层中空</td>
+                    <td></td>
+
+                </tr>
+
+                <tr>
+                    <td>单　　　价：</td>
+                    <td><span id="price" style="color:#167dd4; font-weight:bold;">100</span>元</td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>数　　　量：</td>
+                    <td>
+                        <div class="shuliang"><a href="javascript:void(0);" class="minus"></a><input type="text" name="amount" id="num" value="0"/><a href="javascript:void(0);"
+                                                                                                              class="plus"></a>
+                        </div>
+                        <div style="float:left; line-height:30px; height:30px;   ">份</div>
+                    </td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>总　　　价：</td>
+                    <td colspan="2">
+                        <span id="total_text" style="color:#167dd4; font-weight:bold; font-size:30px;">￥<font>0</font></span>
+                        <input name="total_price" id="total" value="0"type="hidden">
+                    </td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"><button class="lijigoumai">立即购买</button><a href="http://item.taobao.com/item.htm?spm=a230r.1.14.13.QJ9ww3&id=43879897750&ns=1&abbucket=2#detail" target="_blank" class="qutaobaogoumai unuse" >去淘宝购买</a>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="4"><span style="color:#F00; font-size:12px;">备注：所有组件均以已签订的合同为准</span></td>
+
+                </tr>
+            </table>
+        </form>
+
+        </div>
+
+    </div>
+
+</div>
+<dl class="content_box">
+    <dt>
+        <span class="first">名称</span> <span class="second">参数</span>
+    </dt>
+    <dd>
+        <table width="950">
+            <tr>
+                <td width="450" class="bottom_gray chuizhijuzhong">铝合金型材</td>
+                <td width="50"></td>
+                <td width="450" class="bottom_gray">
+                    型号：65系列/75系列<br/>
+                    宽度：65mm/75mm<br/>
+                    壁厚：1.6mm/2.0mm<br/>
+                    颜色：香槟色、白色等多种颜色可选<br/>
+
+                </td>
+            </tr>
+        </table>
+    </dd>
+    <dd>
+        <table width="950">
+            <tr>
+                <td width="450" class="bottom_gray chuizhijuzhong">窗五金</td>
+                <td width="50"></td>
+                <td width="450" class="bottom_gray">
+                    类型：平开/平开上悬/外开/下悬/推拉<br/>
+                    品牌：丝吉利娅/诺托<br/>
+
+                </td>
+            </tr>
+        </table>
+    </dd>
+    <dd>
+        <table width="950">
+            <tr>
+                <td width="450" class="bottom_gray chuizhijuzhong">门五金</td>
+                <td width="50"></td>
+                <td width="450" class="bottom_gray">
+                    类型：内开/外开多点锁<br/>
+                    品牌：丝吉利娅/诺托<br/>
+                </td>
+            </tr>
+        </table>
+    </dd>
+    <dd>
+        <table width="950">
+            <tr>
+                <td width="450" class="bottom_gray chuizhijuzhong">玻璃</td>
+                <td width="50"></td>
+                <td width="450" class="bottom_gray">
+                    厚度：5mm+20A+5mm双层中空/<br/><span style="margin-left:50px;">5mm+9A+5mm+9A+5mm三层中空</span><br/>
+                    类型：浮法玻璃/钢化玻璃/Low-E玻璃<br/>
+                    样式：透明/磨砂/钻石<br/>
+                    内嵌：可选装饰条<br/>
+
+
+                </td>
+            </tr>
+        </table>
+    </dd>
+    <dd>
+        <table width="950">
+            <tr>
+                <td width="450" class="bottom_gray chuizhijuzhong">密封条</td>
+                <td width="50"></td>
+                <td width="450" class="bottom_gray">
+                    材质：三元乙丙耐候密封胶条（EPDM）<br/>
+                    颜色：黑色<br/>
+
+
+                </td>
+            </tr>
+        </table>
+    </dd>
+    <dd>
+        <table width="950">
+            <tr>
+                <td width="450" class="bottom_gray chuizhijuzhong">隔热条</td>
+                <td width="50"></td>
+                <td width="450" class="bottom_gray">
+                    材质：玻璃纤维增强聚酰胺尼龙隔热条（PA66）<br/>
+                    颜色：黑哑光色<br/>
+
+
+                </td>
+            </tr>
+        </table>
+    </dd>
+    <dd>
+        <table width="950">
+            <tr>
+                <td width="450" class="bottom_gray chuizhijuzhong">纱窗纱门</td>
+                <td width="50"></td>
+                <td width="450" class="bottom_gray">
+                    纱窗：上下竖拉式隐形纱窗/金刚网平开纱窗<br/>
+                    纱门：左右对拉式纱门/金刚网平开纱门<br/>
+
+
+                </td>
+            </tr>
+        </table>
+    </dd>
+    <dd>
+        <table width="950">
+            <tr>
+                <td width="450" class="bottom_gray chuizhijuzhong">玻璃胶</td>
+                <td width="50"></td>
+                <td width="450" class="bottom_gray">
+                    类型：门窗专用中性硅酮玻璃胶<br/>
+                    品牌：美国道康宁<br/>
+                    颜色：黑色/白色/灰色/透明<br/>
+
+
+                </td>
+            </tr>
+        </table>
+    </dd>
+    <dd>
+        <table width="950">
+            <tr>
+                <td width="450" class="bottom_gray chuizhijuzhong">发泡胶</td>
+                <td width="50"></td>
+                <td width="450" class="bottom_gray">
+                    类型：门窗专用环保聚氨酯发泡剂<br/>
+                    品牌：桑莱斯<br/>
+                    颜色：白色<br/>
+
+                </td>
+            </tr>
+        </table>
+    </dd>
+    <dd>
+        <table width="950">
+            <tr>
+                <td width="450" class="bottom_gray chuizhijuzhong">其他</td>
+                <td width="50"></td>
+                <td width="450" class="bottom_gray">
+                    型材包装：防刮擦环保纸保护<br/>
+                    五金包装：执手防刮擦双层环保纸保护<br/>
+                    19分贝门窗使用说明书<br/>
+                    19分贝门窗保修卡<br/>
+
+                </td>
+            </tr>
+        </table>
+    </dd>
+</dl>
+</div>
+</div>
+{% endblock %}
+

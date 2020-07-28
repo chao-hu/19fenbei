@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>头像设置</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: "微软雅黑", "宋体", "黑体";
+            text-align: center;
+        }
+
+        .touxiang1 {
+            width: 215px;
+            height: 215px;
+            background: url(../img/touxiang1.png) no-repeat;
+            margin: 0 auto;
+            margin-top: 44px;
+        }
+
+        .yulan {
+            font-size: 14px;
+            color: #000;
+            text-align: center;
+            margin-top: 10px;
+            font-family: "微软雅黑", "宋体", "黑体";
+        }
+
+        .shangchuan_btn {
+            width: 182px;
+            height: 42px;
+            background: url(../img/vip_shangchuan.png) no-repeat;
+            line-height: 42px;
+            text-align: center;
+            color: #fff;
+            display: block;
+            text-decoration: none;
+            margin: 10px auto;
+            font-size: 14px;
+        }
+
+        .shangchuan_btn:hover {
+            background: url(../img/shangchuan_0.png) no-repeat;
+        }
+
+        #img_div {
+            margin:0 auto
+        }
+
+        .xintouxiang{ background:url(../img/shangchuan_touxiang.png) no-repeat; margin:20px auto;}
+
+        .wap {
+            width: 328px;
+            height: 32px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .wap .shangchuan {
+            width: 162px;
+            height: 32px;
+            background: url(../img/shangchuanwancheng.png) no-repeat;
+            text-align: center;
+            line-height: 32px;
+            color: #fff;
+            display: block;
+            text-decoration: none;
+            float: left;
+        }
+
+        .wap .shangchuan:hover {
+            background: url(../img/shangchuanwancheng_0.png) no-repeat;
+        }
+
+        .wap .quxiao {
+            width: 162px;
+            height: 32px;
+            margin-left: 4px;
+            margin-bottom: 20px;
+            background: url(../img/shangchuanquxiao.png) no-repeat;
+            text-align: center;
+            line-height: 32px;
+            color: #fff;
+            display: block;
+            text-decoration: none;
+            float: left;
+        }
+
+        .wap .quxiao:hover {
+            background: url(../img/shangchuanwancheng_0.png) no-repeat;
+        }
+
+        .kongbai {
+            width: 100%;
+            height: 50px;
+        }
+
+        .title_top_66 {
+            position: relative;
+            width: 731px;
+            height: 64px;
+            background: url(../img/tanchu_top.png) repeat-x;
+            border: 1px #c1c1c1 solid;
+            line-height: 64px;
+            text-align: center;
+            color: #6d6d6d;
+            font-size: 28px;
+        }
+
+        .upfile {
+            position: relative;
+            filter: alpha(opacity:0);
+            opacity: 0;
+            float: left;
+            width: 182px;
+            height: 42px;
+            top: -42px
+        }
+    </style>
+    <link rel="stylesheet" href="{{static_domain}}/Jcrop/css/jquery.Jcrop.css" type="text/css" />
+
+    <script type="text/javascript" src="{{static_domain}}/Jcrop/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{static_domain}}/js/uploadPreview.min.js"></script>
+    <script src="{{static_domain}}/Jcrop/js/jquery.Jcrop.min.js"></script>
+    <script>
+
+        function jcropBind()
+        {
+
+            //$("#img_show").attr("onload",function(){
+
+                console.log("fff");
+            if ($('#img_show').attr('src')) {
+                $('#img_show').Jcrop({
+                    aspectRatio: 1,
+                    onSelect: updateCoords
+                });
+            }
+           // });
+
+
+        }
+        function updateCoords(c) {
+            $('#x').val(c.x);
+            $('#y').val(c.y);
+            $('#w').val(c.w);
+            $('#h').val(c.h);
+        }
+
+        function checkCoords() {
+            if (parseInt($('#w').val())) return true;
+            alert('Please select a crop region then press submit.');
+            return false;
+        }
+
+        $(document).ready(function () {
+            $("#img_show").on('load', function() {
+                jcropBind();
+            }).each(function() {
+                if(this.complete) $(this).load();
+            });
+
+            new uploadPreview({ UpBtn: "up_img", DivShow: "img_div", ImgShow: "img_show", callback: jcropBind })
+
+        })
+    </script>
+
+</head>
+
+<body>
+<div class="title_top_66">修改头像</div>
+<form method="post" enctype="multipart/form-data" onsubmit="return checkCoords();">
+    <div class="touxiang1"></div>
+    <div class="yulan">头像预览</div>
+    <a href="#" class="shangchuan_btn">点击上传新头像 <input type="file" id="up_img" name="file" class="upfile"/>
+    </a>
+
+    <div id="img_div">
+        <img class="xintouxiang" id="img_show" width="auto" height="auto"/>
+        <div></div>
+    </div>
+
+    <input type="hidden" id="x" name="x"/>
+    <input type="hidden" id="y" name="y"/>
+    <input type="hidden" id="w" name="w"/>
+    <input type="hidden" id="h" name="h"/>
+
+    <div class="wap">
+        <button class="shangchuan" type="submit">完成上传</button>
+        <button class="quxiao" type="reset">取消</button>
+    </div>
+</form>
+<div class="kongbai"></div>
+</body>
+</html>

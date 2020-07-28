@@ -1,0 +1,313 @@
+<?php
+
+/**
+ * froentend
+ */
+$app->get('/404', function () use ($app) {
+
+    echo $app->twig->render('404.html');
+    return;
+});
+
+/**
+ * froentend
+ */
+$app->get('/error', function () use ($app) {
+
+    echo $app->twig->render('error.html');
+    return;
+});
+
+/**
+ * froentend
+ */
+$app->get('/success', function () use ($app) {
+
+    echo $app->twig->render('success.html');
+    return;
+});
+
+
+/**
+ * froentend index
+ */
+$app->get('/', function () use ($app) {
+
+    $user = Model::factory("User")->create();
+    $user->name = '胡超';
+    $user->sex = 1;
+    $user->mobile = '13641028826';
+    $user->email = "asd@aa.com";
+    $user->save();
+    var_dump($user);
+    return;
+})->name('/');
+
+/**
+ * froentend  reg
+ */
+$app->get('/register', function () use ($app) {
+
+
+    return;
+})->name('/register');
+
+/**
+ * froentend  reg post ajax
+ */
+$app->post('/register', function () use ($app) {
+
+
+    return;
+})->name('/register-post');
+
+/**
+ * froentend  login post ajax
+ */
+$app->post('/login', function () use ($app) {
+
+
+    return;
+})->name('/login-post');
+
+/**
+ * froentend  member index
+ */
+$app->get('/member', function () use ($app) {
+
+
+    return;
+})->name('/member');
+
+/**
+ * froentend  member info post ajax
+ */
+$app->post('/member', function () use ($app) {
+
+
+    return;
+})->name('/member-info-post');
+
+/**
+ * froentend  photo post ajax
+ */
+$app->post('/member-photo', function () use ($app) {
+
+
+    return;
+})->name('/member-photo-post');
+
+/**
+ * froentend  address show
+ */
+$app->get('/address', function () use ($app) {
+
+
+    return;
+})->name('/address');
+
+/**
+ * froentend  address post ajax
+ */
+$app->post('/address', function () use ($app) {
+
+
+    return;
+})->name('/address-post');
+
+
+/**
+ * froentend  order list
+ */
+$app->get('/order', function () use ($app) {
+
+
+    return;
+})->name('/order');
+
+/**
+ * froentend  comments list
+ */
+$app->get('/comments', function () use ($app) {
+
+
+    return;
+})->name('/comments');
+
+/**
+ * froentend  comments post ajax
+ */
+$app->post('/comments', function () use ($app) {
+
+
+    return;
+})->name('/comments-post');
+
+/**
+ * froentend  comments photo  post ajax
+ */
+$app->post('/comments-photo', function () use ($app) {
+
+
+    return;
+})->name('/comments-photo-post');
+
+
+/**
+ * froentend  passwd post ajax
+ */
+$app->post('/passwd', function () use ($app) {
+
+
+    return;
+})->name('/passwd');
+
+
+/**
+ * froentend  windows index
+ */
+$app->get('/windows', function () use ($app) {
+
+
+    return;
+})->name('/windows');
+
+/**
+ * froentend  sun-room index
+ */
+$app->get('/sun-room', function () use ($app) {
+
+
+    return;
+})->name('/sun-room');
+
+
+/**
+ * froentend  windows buy
+ */
+$app->get('/windows-buy', function () use ($app) {
+
+
+    return;
+})->name('/windows-buy');
+
+/**
+ * froentend  sun-room buy
+ */
+$app->get('/sun-room-buy', function () use ($app) {
+
+
+    return;
+})->name('/sun-room-buy');
+
+
+/**
+ * froentend  order post show
+ */
+$app->post('/order', function () use ($app) {
+
+
+    return;
+})->name('/order-post');
+
+/**
+ * froentend  order-address post ajax
+ */
+$app->post('/order-address', function () use ($app) {
+
+
+    return;
+})->name('/order-address-post');
+
+/**
+ * froentend  check
+ */
+$app->post('/check', function () use ($app) {
+
+
+    return;
+})->name('/check');
+
+
+/**
+ * froentend  captcha show
+ */
+$app->get('/captcha', function () use ($app) {
+
+
+    return;
+})->name('/captcha');
+
+/**
+ * froentend  sms send
+ */
+$app->post('/smssend', function () use ($app) {
+
+
+    return;
+})->name('/smssend');
+
+/**
+ * froentend  privacy
+ */
+$app->get('/privacy', function () use ($app) {
+
+
+    return;
+})->name('/privacy');
+
+/**
+ * froentend  privacy
+ */
+$app->get('/buy-help', function () use ($app) {
+
+
+    return;
+})->name('/buy-help');
+
+/**
+ * froentend  about
+ */
+$app->get('/about', function () use ($app) {
+
+
+    return;
+})->name('/about');
+
+/**
+ * froentend  contact us
+ */
+$app->get('/contactus', function () use ($app) {
+
+
+    return;
+})->name('/contactus');
+
+
+/**
+ * froentend  advantage
+ */
+$app->get('/our-advantage', function () use ($app) {
+
+
+    return;
+})->name('/our_advantage');
+
+/**
+ * froentend  after service
+ */
+$app->get('/after-service', function () use ($app) {
+
+
+    return;
+})->name('/after-service');
+
+/**
+ * froentend  payment
+ */
+$app->get('/payment', function () use ($app) {
+
+
+    return;
+})->name('/payment');
+

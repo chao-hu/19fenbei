@@ -1,0 +1,12 @@
+{
+    "name": "Anychem-mobile",
+    "description": "mobile",
+    "require": {
+        "slim/slim": "2.4.*",
+        "slim/extras": "2.0.*",
+        "slim/views":"0.1.*",
+        "twig/twig": "1.*",
+        "twig/extensions": "*"
+    }
+
+}

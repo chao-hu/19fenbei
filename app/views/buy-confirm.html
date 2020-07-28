@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block title %}
+购买确认
+{% endblock %}
+
+{% block content %}
+
+<div  id="goumai_wap" >
+    <div class="main_middle">
+        <div class="top_img"></div>
+
+        <div class="shouhuoxinxi">收货信息</div>
+        <table class="xinxi_wap">
+            <tr>
+                <td>
+                    <font>姓名：</font><br />
+                    <input type="radio" />leiyang
+                </td>
+                <td>
+                    <font>详细地址</font>：<br />
+                    北京市 市辖区 西城区 马连道世纪茶贸中心
+                </td>
+                <td >
+                    <font>电话:</font><br />
+                    13521219826
+                </td>
+                <td class="wu">
+                    <span class="icon_bi"></span>
+                </td>
+            </tr>
+        </table>
+
+        <div class="bot_line"></div>
+        <div class="zhifufangshi">支付方式</div>
+        <div class="zhifufangshi_wap">
+            <div class="top"><input type="radio" />  平台支付</div>
+            <div class="bottom"><input type="radio" style="float:left;" /> <span class="zhifubao"></span></div>
+        </div>
+        <div class="dingdanzongji"><span class="zongji">订单总计：</span><span class="jine">$16000.00</span> <a href="#" class="xiayibu">下一步</a></div>
+
+
+    </div>
+
+</div>
+
+
+{% endblock %}
