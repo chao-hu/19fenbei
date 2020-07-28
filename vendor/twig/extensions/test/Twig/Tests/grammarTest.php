@@ -9,28 +9,22 @@
  * file that was distributed with this source code.
  */
 
-/**
- * @group legacy
- */
-class grammarTest extends \PHPUnit\Framework\TestCase
-{
-    protected function setUp()
-    {
-        require_once __DIR__.'/SimpleTokenParser.php';
-    }
+require_once dirname(__FILE__).'/SimpleTokenParser.php';
 
+class grammarTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @dataProvider getTests
      */
     public function testGrammar($tag, $grammar, $template, $output, $exception)
     {
-        $twig = new Twig_Environment(new Twig_Loader_Array(array('template' => $template)), array('cache' => false, 'autoescape' => false, 'debug' => true));
+        $twig = new Twig_Environment(new Twig_Loader_String(), array('cache' => false, 'autoescape' => false, 'debug' => true));
         $twig->addExtension(new Twig_Extension_Debug());
         $twig->addTokenParser(new SimpleTokenParser($tag, $grammar));
 
         $ok = true;
         try {
-            $template = $twig->loadTemplate('template');
+            $template = $twig->loadTemplate($template);
         } catch (Exception $e) {
             $ok = false;
 

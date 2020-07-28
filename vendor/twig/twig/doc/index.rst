@@ -5,12 +5,10 @@ Twig
     :maxdepth: 2
 
     intro
-    installation
     templates
     api
     advanced
     internals
-    deprecated
     recipes
     coding_standards
     tags/index

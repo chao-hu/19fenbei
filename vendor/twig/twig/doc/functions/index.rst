@@ -4,17 +4,12 @@ Functions
 .. toctree::
     :maxdepth: 1
 
+    range
+    cycle
+    constant
+    random
     attribute
     block
-    constant
-    cycle
-    date
-    dump
-    include
-    max
-    min
     parent
-    random
-    range
-    source
-    template_from_string
+    dump
+    date

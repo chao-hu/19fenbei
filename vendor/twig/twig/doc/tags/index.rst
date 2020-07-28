@@ -4,24 +4,21 @@ Tags
 .. toctree::
     :maxdepth: 1
 
-    apply
-    autoescape
-    block
-    deprecated
-    do
-    embed
-    extends
-    filter
-    flush
     for
-    from
     if
-    import
-    include
     macro
-    sandbox
+    filter
     set
-    spaceless
+    extends
+    block
+    include
+    import
+    from
     use
-    verbatim
-    with
+    spaceless
+    autoescape
+    raw
+    flush
+    do
+    sandbox
+    embed

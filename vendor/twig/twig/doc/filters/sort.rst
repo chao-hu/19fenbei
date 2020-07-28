@@ -3,16 +3,15 @@
 
 The ``sort`` filter sorts an array:
 
-.. code-block:: twig
+.. code-block:: jinja
 
-    {% for user in users|sort %}
+    {% for use in users|sort %}
         ...
     {% endfor %}
 
 .. note::
 
     Internally, Twig uses the PHP `asort`_ function to maintain index
-    association. It supports Traversable objects by transforming
-    those to arrays.
+    association.
 
-.. _`asort`: https://secure.php.net/asort
+.. _`asort`: http://php.net/asort

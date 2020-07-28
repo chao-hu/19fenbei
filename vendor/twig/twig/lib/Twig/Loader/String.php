@@ -3,59 +3,59 @@
 /*
  * This file is part of Twig.
  *
- * (c) Fabien Potencier
+ * (c) 2009 Fabien Potencier
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-use Twig\Loader\ExistsLoaderInterface;
-use Twig\Loader\LoaderInterface;
-use Twig\Loader\SourceContextLoaderInterface;
-use Twig\Source;
-
-@trigger_error('The Twig_Loader_String class is deprecated since version 1.18.1 and will be removed in 2.0. Use "Twig\Loader\ArrayLoader" instead or "Twig\Environment::createTemplate()".', E_USER_DEPRECATED);
-
 /**
  * Loads a template from a string.
  *
- * This loader should NEVER be used. It only exists for Twig internal purposes.
+ * This loader should only be used for unit testing as it has many limitations
+ * (for instance, the include or extends tag does not make any sense for a string
+ * loader).
  *
  * When using this loader with a cache mechanism, you should know that a new cache
  * key is generated each time a template content "changes" (the cache key being the
  * source code of the template). If you don't want to see your cache grows out of
  * control, you need to take care of clearing the old cache file by yourself.
  *
- * @deprecated since 1.18.1 (to be removed in 2.0)
- *
- * @internal
- *
- * @author Fabien Potencier <fabien@symfony.com>
+ * @package    twig
+ * @author     Fabien Potencier <fabien@symfony.com>
  */
-class Twig_Loader_String implements LoaderInterface, ExistsLoaderInterface, SourceContextLoaderInterface
+class Twig_Loader_String implements Twig_LoaderInterface
 {
+    /**
+     * Gets the source code of a template, given its name.
+     *
+     * @param string $name The name of the template to load
+     *
+     * @return string The template source code
+     */
     public function getSource($name)
     {
-        @trigger_error(sprintf('Calling "getSource" on "%s" is deprecated since 1.27. Use getSourceContext() instead.', static::class), E_USER_DEPRECATED);
-
         return $name;
     }
 
-    public function getSourceContext($name)
-    {
-        return new Source($name, $name);
-    }
-
-    public function exists($name)
-    {
-        return true;
-    }
-
+    /**
+     * Gets the cache key to use for the cache for a given template name.
+     *
+     * @param string $name The name of the template to load
+     *
+     * @return string The cache key
+     */
     public function getCacheKey($name)
     {
         return $name;
     }
 
+    /**
+     * Returns true if the template is still fresh.
+     *
+     * @param string    $name The template name
+     * @param timestamp $time The last modification time of the cached template
+     */
     public function isFresh($name, $time)
     {
         return true;

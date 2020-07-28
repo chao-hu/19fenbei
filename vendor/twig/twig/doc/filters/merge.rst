@@ -1,9 +1,9 @@
 ``merge``
 =========
 
-The ``merge`` filter merges an array with another array:
+The ``merge`` filter merges an array with the another array:
 
-.. code-block:: twig
+.. code-block:: jinja
 
     {% set values = [1, 2] %}
 
@@ -15,7 +15,7 @@ New values are added at the end of the existing ones.
 
 The ``merge`` filter also works on hashes:
 
-.. code-block:: twig
+.. code-block:: jinja
 
     {% set items = { 'apple': 'fruit', 'orange': 'fruit', 'peugeot': 'unknown' } %}
 
@@ -32,17 +32,10 @@ overridden.
     If you want to ensure that some values are defined in an array (by given
     default values), reverse the two elements in the call:
 
-    .. code-block:: twig
+    .. code-block:: jinja
 
         {% set items = { 'apple': 'fruit', 'orange': 'fruit' } %}
 
         {% set items = { 'apple': 'unknown' }|merge(items) %}
 
         {# items now contains { 'apple': 'fruit', 'orange': 'fruit' } #}
-        
-.. note::
-
-    Internally, Twig uses the PHP `array_merge`_ function. It supports
-    Traversable objects by transforming those to arrays.
-
-.. _`array_merge`: https://secure.php.net/array_merge

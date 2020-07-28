@@ -9,10 +9,7 @@
  * file that was distributed with this source code.
  */
 
-/**
- * @group legacy
- */
-class Twig_Tests_SimpleTokenParserTest extends \PHPUnit\Framework\TestCase
+class Twig_Tests_SimpleTokenParserTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getTests

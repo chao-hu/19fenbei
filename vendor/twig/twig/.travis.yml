@@ -1,36 +1,14 @@
 language: php
 
-dist: xenial
-
-cache:
-    directories:
-        - vendor
-        - $HOME/.composer/cache/files
+php:
+  - 5.2
+  - 5.3
+  - 5.4
 
 env:
-    global:
-        - SYMFONY_PHPUNIT_DISABLE_RESULT_CACHE=1
+  - TWIG_EXT=no
+  - TWIG_EXT=yes
 
-before_install:
-    - phpenv config-rm xdebug.ini || return 0
-    - echo memory_limit = -1 >> ~/.phpenv/versions/$TRAVIS_PHP_VERSION/etc/conf.d/travis.ini
-
-install:
-    - travis_retry composer install
-    - export PHPUNIT=$(readlink -f ./vendor/bin/simple-phpunit)
-    - $PHPUNIT install
-
-script:
-    - $PHPUNIT
-
-jobs:
-    fast_finish: true
-    include:
-        - php: 7.1
-        - php: 7.2
-        - php: 7.3
-        - php: 7.4
-        - php: nightly
-        - stage: integration tests
-          php: 7.3
-          script: ./drupal_test.sh
+before_script:
+  - if [ "$TWIG_EXT" == "yes" ]; then sh -c "cd ext/twig && phpize && ./configure --enable-twig && make && sudo make install"; fi
+  - if [ "$TWIG_EXT" == "yes" ]; then echo "extension=twig.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`; fi

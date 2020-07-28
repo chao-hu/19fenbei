@@ -10,12 +10,12 @@
     regular templates. It is mainly used by projects that need to make
     template blocks reusable without using inheritance.
 
-Template inheritance is one of the most powerful features of Twig but it is
+Template inheritance is one of the most powerful Twig's feature but it is
 limited to single inheritance; a template can only extend one other template.
 This limitation makes template inheritance simple to understand and easy to
 debug:
 
-.. code-block:: twig
+.. code-block:: jinja
 
     {% extends "base.html" %}
 
@@ -25,7 +25,7 @@ debug:
 Horizontal reuse is a way to achieve the same goal as multiple inheritance,
 but without the associated complexity:
 
-.. code-block:: twig
+.. code-block:: jinja
 
     {% extends "base.html" %}
 
@@ -35,19 +35,18 @@ but without the associated complexity:
     {% block content %}{% endblock %}
 
 The ``use`` statement tells Twig to import the blocks defined in
-``blocks.html`` into the current template (it's like macros, but for blocks):
+```blocks.html`` into the current template (it's like macros, but for blocks):
 
-.. code-block:: twig
+.. code-block:: jinja
 
-    {# blocks.html #}
-    
+    # blocks.html
     {% block sidebar %}{% endblock %}
 
 In this example, the ``use`` statement imports the ``sidebar`` block into the
 main template. The code is mostly equivalent to the following one (the
 imported blocks are not outputted automatically):
 
-.. code-block:: twig
+.. code-block:: jinja
 
     {% extends "base.html" %}
 
@@ -70,11 +69,11 @@ The main template can also override any imported block. If the template
 already defines the ``sidebar`` block, then the one defined in ``blocks.html``
 is ignored. To avoid name conflicts, you can rename imported blocks:
 
-.. code-block:: twig
+.. code-block:: jinja
 
     {% extends "base.html" %}
 
-    {% use "blocks.html" with sidebar as base_sidebar, title as base_title %}
+    {% use "blocks.html" with sidebar as base_sidebar %}
 
     {% block sidebar %}{% endblock %}
     {% block title %}{% endblock %}
@@ -87,7 +86,7 @@ The ``parent()`` function automatically determines the correct inheritance
 tree, so it can be used when overriding a block defined in an imported
 template:
 
-.. code-block:: twig
+.. code-block:: jinja
 
     {% extends "base.html" %}
 
@@ -108,7 +107,7 @@ the ``blocks.html`` template.
     In Twig 1.2, renaming allows you to simulate inheritance by calling the
     "parent" block:
 
-    .. code-block:: twig
+    .. code-block:: jinja
 
         {% extends "base.html" %}
 

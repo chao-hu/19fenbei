@@ -4,7 +4,7 @@
 The ``sandbox`` tag can be used to enable the sandboxing mode for an included
 template, when sandboxing is not enabled globally for the Twig environment:
 
-.. code-block:: twig
+.. code-block:: jinja
 
     {% sandbox %}
         {% include 'user.html' %}
@@ -19,9 +19,9 @@ template, when sandboxing is not enabled globally for the Twig environment:
 
     The ``sandbox`` tag can only be used to sandbox an include tag and it
     cannot be used to sandbox a section of a template. The following example
-    won't work:
+    won't work for example:
 
-    .. code-block:: twig
+    .. code-block:: jinja
 
         {% sandbox %}
             {% for i in 1..2 %}
